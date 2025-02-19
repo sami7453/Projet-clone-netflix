@@ -8,7 +8,7 @@ class Actor {
 
     static async getActorById(id) {
         const result = await pool.query(
-            'SELECT * FROM actors WHERE id = $id',
+            'SELECT * FROM actors WHERE id = $1',
             [id]
         );
         return result.rows[0];

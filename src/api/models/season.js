@@ -16,7 +16,7 @@ class Season {
 
     static async createSeason({ seriesId, number, description, date, episodeCount }) {
         const result = await pool.query(
-            'INSERT INTO seasons (series_id, season_number, description, release_date, episode_count) VALUES($1, $2, $3, $4, $5) RETURNING *',
+            'INSERT INTO seasons (series_id, season_number, description, release_date, episode_count) VALUES ($1, $2, $3, $4, $5) RETURNING *',
             [seriesId, number, description, date, episodeCount]
         );
         return result.rows[0];
