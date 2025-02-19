@@ -27,6 +27,7 @@ class Actor {
             'UPDATE actors SET first_name = $1, last_name = $2, movie_id = $3, series_id = $4 WHERE id = $5 RETURNING *',
             [firstName, lastName, movieId, seriesId, id]
         );
+        return result.rows[0];
     }
 
     static async deleteActor(id) {

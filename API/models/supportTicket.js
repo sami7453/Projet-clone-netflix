@@ -27,6 +27,7 @@ class SupportTicket {
             'UPDATE support_tickets SET title = $1, description = $2 WHERE id = $3 RETURNING *',
             [title, description, id]
         );
+        return result.rows[0];
     }
 
     static async deleteSupportTicket(id) {

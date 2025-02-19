@@ -27,6 +27,7 @@ class Rating {
             'UPDATE ratings SET grade = $1, title = $2, description = $3 WHERE id = $4 RETURNING *',
             [grade, title, description, id]
         );
+        return result.rows[0];
     }
 
     static async deleteRating(id) {
