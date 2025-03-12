@@ -29,7 +29,7 @@ app.post('/movies', async (req, res) => {
         if (!title || !description || !release_date || !category || !poster || !category_id) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        const movie = await Movie.addMovie(title, description, release_date, category, poster, category_id);
+        const movie = await Movie.createMovie(title, description, release_date, category, poster, category_id);
         res.status(201).json(movie);
     } catch (err) {
         res.status(500).json({ message: err.message });
