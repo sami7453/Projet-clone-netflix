@@ -1,5 +1,6 @@
 const Actor = require('../models/actor');
 
+// GET all actors
 app.get('/actors', async (req, res) => {
     try {
         const actors = await Actor.getAllActors();
@@ -9,6 +10,7 @@ app.get('/actors', async (req, res) => {
     }
 });
 
+// GET actor by id
 app.get('/actors/:id', async (req, res) => {
     try {
         const actor = await Actor.getActorById(req.params.id);
@@ -18,6 +20,27 @@ app.get('/actors/:id', async (req, res) => {
     }
 });
 
+// GET actors by movie id
+app.get('/actors/:movie_id', async (req, res) => {
+    try {
+        const actors = await Actor.getActorsByMovieId(req.params.movie_id);
+        res.status(200).json(actors);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// GET actors by series id
+app.get('/actors/:series_id', async (req, res) => {
+    try {
+        const actors = await Actor.getActorsBySeriesId(req.params.series_id);
+        res.status(200).json(actors);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// POST actor
 app.post('/actors', async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -31,6 +54,7 @@ app.post('/actors', async (req, res) => {
     }
 });
 
+// PUT actor
 app.put('/actors/:id', async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -44,6 +68,7 @@ app.put('/actors/:id', async (req, res) => {
     }
 });
 
+// DELETE actor
 app.delete('/actors/:id', async (req, res) => {
     try {
         const actor = await Actor.deleteActor(req.params.id);

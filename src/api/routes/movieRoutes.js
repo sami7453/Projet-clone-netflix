@@ -5,6 +5,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
+// GET all movies
 app.get('/movies', async (req, res) => {
     try {
         const movies = await Movie.getAllMovie();
@@ -14,6 +15,7 @@ app.get('/movies', async (req, res) => {
     }
 });
 
+// GET movie by id
 app.get('/movies/:id', async (req, res) => {
     try {
         const movie = await Movie.getMovieById(req.params.id);
@@ -23,6 +25,7 @@ app.get('/movies/:id', async (req, res) => {
     }
 });
 
+// POST movie
 app.post('/movies', async (req, res) => {
     try {
         const { title, description, release_date, category, poster, category_id } = req.body;

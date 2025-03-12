@@ -1,5 +1,6 @@
 const SupportTicket = require('../models/supportTicket');
 
+// GET all support tickets
 app.get('/support-tickets', async (req, res) => {
     try {
         const actors = await SupportTicket.getAllSupportTickets();
@@ -9,6 +10,7 @@ app.get('/support-tickets', async (req, res) => {
     }
 });
 
+// GET support ticket by id
 app.get('/support-tickets/:id', async (req, res) => {
     try {
         const actor = await SupportTicket.getSupportTicketById(req.params.id);
@@ -18,6 +20,12 @@ app.get('/support-tickets/:id', async (req, res) => {
     }
 });
 
+// GET support ticket by user id
+app.get('/support-tickets/:user_id', async (req, res) => {
+
+});
+
+// POST support ticket
 app.post('/support-tickets', async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -31,7 +39,8 @@ app.post('/support-tickets', async (req, res) => {
     }
 });
 
-app.put('/support-ticket/:id', async (req, res) => {
+// PUT support ticket
+app.put('/support-tickets/:id', async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
         if (!firstName || !lastName || !movieId || !seriesId) {
@@ -44,7 +53,8 @@ app.put('/support-ticket/:id', async (req, res) => {
     }
 });
 
-app.delete('/support-ticket/:id', async (req, res) => {
+// DELETE support ticket
+app.delete('/support-tickets/:id', async (req, res) => {
     try {
         const actor = await SupportTicket.deleteSupportTicket(req.params.id);
         actor ? res.status(200).json(actor) : res.status(404).json({ message: 'Actor not found' });
