@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Serie {
+    // ----------------- CRUD -----------------
+    
     static async getAllSeries() {
         const result = await pool.query('SELECT * FROM series')
         return result.rows;
     }
 
     static async getSerieById(id) {
-        const result = await pool.query(
-            'SELECT * FROM series WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM series WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,10 +30,7 @@ class Serie {
     }
 
     static async deleteSerie(id) {
-        await pool.query(
-            'DELETE FROM series WHERE id = $1',
-            [id]
-        );
+        await pool.query('DELETE FROM series WHERE id = $1', [id]);
     }
 }
 

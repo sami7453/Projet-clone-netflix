@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class SupportTicket {
+    // ----------------- CRUD -----------------
+    
     static async getAllSupportTickets() {
         const result = await pool.query('SELECT * FROM support_tickets');
         return result.rows;
     }
 
     static async getSupportTicketById(id) {
-        const result = await pool.query(
-            'SELECT * FROM support_tickets WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM support_tickets WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,10 +30,7 @@ class SupportTicket {
     }
 
     static async deleteSupportTicket(id) {
-        await pool.query(
-            'DELETE FROM support_tickets WHERE id = $1',
-            [id]  
-        );
+        await pool.query('DELETE FROM support_tickets WHERE id = $1', [id]);
     }
 }
 

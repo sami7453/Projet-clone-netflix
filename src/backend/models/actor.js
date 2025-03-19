@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Actor {
+    // ----------------- CRUD -----------------
+
     static async getAllActors() {
         const result = await pool.query('SELECT * FROM actors');
         return result.rows;
     }
 
     static async getActorById(id) {
-        const result = await pool.query(
-            'SELECT * FROM actors WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM actors WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,10 +30,19 @@ class Actor {
     }
 
     static async deleteActor(id) {
-        await pool.query(
-            'DELETE FROM actors WHERE id = $1',
-            [id]
-        );
+        await pool.query('DELETE FROM actors WHERE id = $1', [id]);
+    }
+
+    // ----------------- EXTRA -----------------
+
+    static async getActorsByMovieId(id) {
+        const result = await pool.query('SELECT * FROM actors WHERE movie_id = $1', [id]);
+        return result.rows;
+    }
+
+    static async getActorsBySeriesId(id) {
+        const result = await pool.query('SELECT * FROM actors WHERE series_id = $1', [id]);
+        return result.rows;
     }
 }
 

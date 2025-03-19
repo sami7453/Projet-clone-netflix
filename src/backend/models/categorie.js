@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Categorie {
+    // ----------------- CRUD -----------------
+
     static async getAllCategories() {
         const result = await pool.query('SELECT * FROM categories')
         return result.rows;
     }
 
     static async getCategoryById(id) {
-        const result = await pool.query(
-            'SELECT * FROM categories WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM categories WHERE id = $1', [id]);
         return result.rows[0];
     }
     
@@ -31,10 +30,7 @@ class Categorie {
     }
     
     static async deleteCategorie(id) {
-        await pool.query(
-            'DELETE FROM categories WHERE id = $1',
-            [id]
-        );
+        await pool.query('DELETE FROM categories WHERE id = $1', [id]);
     }
 }
 

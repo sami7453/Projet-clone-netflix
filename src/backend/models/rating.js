@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Rating {
+    // ----------------- CRUD -----------------
+
     static async getAllRatings() {
         const result = await pool.query('SELECT * FROM ratings');
         return result.rows;
     }
 
     static async getRatingById(id) {
-        const result = await pool.query(
-            'SELECT * FROM ratings WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM ratings WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,10 +30,7 @@ class Rating {
     }
 
     static async deleteRating(id) {
-        await pool.query(
-            'DELETE FROM ratings WHERE id = $1',
-            [id]
-        );
+        await pool.query('DELETE FROM ratings WHERE id = $1', [id]);
     }
 }
 

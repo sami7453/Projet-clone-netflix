@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Movie {
+    // ----------------- CRUD -----------------
+
     static async getAllMovies() {
         const result = await pool.query('SELECT * FROM movies');
         return result.rows;
     }
 
     static async getMovieById(id) {
-        const result = await pool.query(
-            'SELECT * FROM movies WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM movies WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,13 +30,11 @@ class Movie {
     }
 
     static async deleteMovie(id) {
-        await pool.query(
-            'DELETE FROM movies WHERE id = $1 RETURNING *',
-            [id]
-        );
+        await pool.query('DELETE FROM movies WHERE id = $1 RETURNING *', [id]);
     }
 
-    // func additional
+    // ----------------- EXTRA -----------------
+
     static async getMovieByCategory(category_id) {
         const result = await pool.query('SELECT * FROM movies WHERE category_id = $1', [category_id]);
         return result.rows;
@@ -99,12 +96,6 @@ class Movie {
     //     const result = await pool.query(query, [user_id]);
     //     return result.rows;
     // }
-
-
-
-
-
-
 }
 
 module.exports = Movie;

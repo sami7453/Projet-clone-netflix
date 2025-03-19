@@ -1,16 +1,15 @@
 const pool = require('../db/pool');
 
 class Season {
+    // ----------------- CRUD -----------------
+    
     static async getAllSeasons() {
         const result = await pool.query('SELECT * FROM seasons');
         return result.rows;
     }
 
     static async getSeasonsById(id) {
-        const result = await pool.query(
-            'SELECT * FROM seasons WHERE id = $1',
-            [id]
-        );
+        const result = await pool.query('SELECT * FROM seasons WHERE id = $1', [id]);
         return result.rows[0];
     }
 
@@ -31,10 +30,7 @@ class Season {
     }
 
     static async deleteSeason(id) {
-        await pool.query(
-            'DELETE FROM seasons WHERE id = $1',
-            [id]
-        );
+        await pool.query('DELETE FROM seasons WHERE id = $1', [id]);
     }
 }
 
