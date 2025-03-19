@@ -1,8 +1,8 @@
 const pool = require('../db/pool');
 
-class Serie {
+class Series {
     // ----------------- CRUD -----------------
-    
+
     static async getAllSeries() {
         const result = await pool.query('SELECT * FROM series')
         return result.rows;

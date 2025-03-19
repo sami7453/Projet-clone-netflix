@@ -1,5 +1,7 @@
 const Actor = require('../models/actor');
 
+// ----------------- CRUD -----------------
+
 // GET all actors
 app.get('/actors', async (req, res) => {
     try {
@@ -20,27 +22,7 @@ app.get('/actors/:id', async (req, res) => {
     }
 });
 
-// GET actors by movie id
-app.get('/actors/:movie_id', async (req, res) => {
-    try {
-        const actors = await Actor.getActorsByMovieId(req.params.movie_id);
-        res.status(200).json(actors);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// GET actors by series id
-app.get('/actors/:series_id', async (req, res) => {
-    try {
-        const actors = await Actor.getActorsBySeriesId(req.params.series_id);
-        res.status(200).json(actors);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// POST actor
+// POST actor 
 app.post('/actors', async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -73,6 +55,28 @@ app.delete('/actors/:id', async (req, res) => {
     try {
         const actor = await Actor.deleteActor(req.params.id);
         actor ? res.status(200).json(actor) : res.status(404).json({ message: 'Actor not found' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// ----------------- EXTRA -----------------
+
+// GET actors by movie id
+app.get('/actors/movies/:movie_id', async (req, res) => {
+    try {
+        const actors = await Actor.getActorsByMovieId(req.params.movie_id);
+        res.status(200).json(actors);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// GET actors by series id
+app.get('/actors/series/:series_id', async (req, res) => {
+    try {
+        const actors = await Actor.getActorsBySeriesId(req.params.series_id);
+        res.status(200).json(actors);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

@@ -1,5 +1,7 @@
 const SupportTicket = require('../models/supportTicket');
 
+// ----------------- CRUD -----------------
+
 // GET all support tickets
 app.get('/support-tickets', async (req, res) => {
     try {
@@ -20,10 +22,6 @@ app.get('/support-tickets/:id', async (req, res) => {
     }
 });
 
-// GET support ticket by user id
-app.get('/support-tickets/:user_id', async (req, res) => {
-
-});
 
 // POST support ticket
 app.post('/support-tickets', async (req, res) => {
@@ -61,4 +59,11 @@ app.delete('/support-tickets/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
+});
+
+// ----------------- EXTRA -----------------
+
+// GET support ticket by user id
+app.get('/support-tickets/users/:user_id', async (req, res) => {
+
 });
