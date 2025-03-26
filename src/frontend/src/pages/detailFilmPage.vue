@@ -1,13 +1,15 @@
 <template>
-    <section class="affiche">
-        <img src="../src/assets/vue.svg" alt="affiche de la serie">
-    </section>
-    <section class="infos">
-        <h1>{{ titre }}</h1>
-        <div class="conteneur_liste">
-            <Vignette v-for="(saison, index) in saisons" :key="index" :vignette="saison" />
-        </div>
-    </section>
+    <main>
+        <section class="affiche">
+            <img src="../src/assets/vue.svg" alt="affiche de la serie">
+        </section>
+        <section class="infos">
+            <h1>{{ titre }}</h1>
+            <div class="conteneur_liste">
+                <Vignette v-for="(saison, index) in saisons" :key="index" :vignette="saison" />
+            </div>
+        </section>
+    </main>
 </template>
 
 <script lang="ts">
@@ -33,7 +35,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="css">
+<style scoped>
 body {
     padding: 0;
     margin: 0;
