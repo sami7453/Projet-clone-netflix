@@ -6,7 +6,12 @@
         <section class="infos">
             <h1>{{ titre }}</h1>
             <div class="conteneur_liste">
-                <Vignette v-for="(saison, index) in saisons" :key="index" :vignette="saison" />
+                <Vignette 
+                    v-for="(saison, index) in saisons" 
+                    :key="index" 
+                    :vignette="saison" 
+                    :buttonText="saison.buttonText" 
+                />
             </div>
         </section>
     </main>
@@ -15,7 +20,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Vignette from '../components/VignetteComponent.vue';
-import type { Vignette } from '../interfaces/VignetteComponent';
 
 export default defineComponent({
     name: 'Infos',
@@ -24,12 +28,11 @@ export default defineComponent({
         return {
             titre: 'Titre de la serie',
             saisons: [
-                { titre: 'saison 1' },
-                { titre: 'saison 2' },
-                { titre: 'saison 3' },
-                { titre: 'saison 4' }
-
-            ] as Vignette[]
+                { titre: 'saison 1', buttonText: 'Voir les épisodes' },
+                { titre: 'saison 2', buttonText: 'Voir les épisodes' },
+                { titre: 'saison 3', buttonText: 'Voir les épisodes' },
+                { titre: 'saison 4', buttonText: 'Voir les épisodes' }
+            ] as Array<{ titre: string; buttonText: string }>
         };
     }
 });

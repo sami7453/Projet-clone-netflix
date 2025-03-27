@@ -14,5 +14,12 @@
     defineProps<ButtonComponentProperties>();
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+button {
+    padding: 10px 20px;
+    background-color: #ffffff26;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 </style>

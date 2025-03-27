@@ -43,10 +43,6 @@
           <button @click="toggleForms">Connectez-vous</button>
         </div>
     </main>
-  
-    <footer class="apparition">
-        <p>&copy; Tous droits réservés</p>
-    </footer>
 </template>
   
 <script setup lang="ts">
