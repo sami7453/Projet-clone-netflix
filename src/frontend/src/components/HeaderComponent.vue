@@ -1,13 +1,7 @@
 <template>
     <header>
-        <RouterLink to="/">
-            <img
-                :src="isCollapsed ? currentSmallLogo : currentFullLogo"
-                alt="logo"
-                class="logo-img"
-                :class="{ flipping: isFlipping }"
-                @animationend="onFlipEnd"
-            />
+        <RouterLink to="/" class="logo">
+            <img src="../assets/media/logo-light.PNG" alt="Logo" />
         </RouterLink>
         <nav>
             <RouterLink to="/">Accueil</RouterLink>
@@ -20,121 +14,105 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, computed, onMounted } from 'vue'
+    import ButtonComponent from "../components/ButtonComponent.vue";
+    import type ButtonInterface from "../interfaces/ButtonInterface";
 
-    const isCollapsed = ref(true)
-    const isFlipping = ref(false)
-    const isDark = ref(false)
+    const buttonLogout: ButtonInterface = {
+        id: "logout-btn",
+        type: "button",
+        class: "",
+        textContent: "Déconnexion"
+    };
 
-    const fullLogoLight = new URL('../assets/media/logo-light.png', import.meta.url).href
-    const smallLogoLight = new URL('../assets/media/small-logo-light.png', import.meta.url).href
-    const fullLogoDark = new URL('../assets/media/logo-dark.png', import.meta.url).href
-    const smallLogoDark = new URL('../assets/media/small-logo-dark.png', import.meta.url).href
+    const buttonProfile: ButtonInterface = {
+        id: "profile-btn",
+        type: "button",
+        class: "",
+        textContent: "Profil"
+    };
 
-    const currentFullLogo = computed(() => isDark.value ? fullLogoDark : fullLogoLight)
-    const currentSmallLogo = computed(() => isDark.value ? smallLogoDark : smallLogoLight)
+    const handleProfile = () => {
+        // TODO: Vérifier si l'utilisateur est connecté
+        window.location.href = `/#/user`;
+    };
 
-    const triggerFlip = () => {
-        isFlipping.value = true
-        setTimeout(() => {
-            isCollapsed.value = !isCollapsed.value
-        }, 150)
-    }
-
-    const onFlipEnd = () => {
-    isFlipping.value = false
-    }
-
-    onMounted(() => {
-    isDark.value = document.documentElement.classList.contains('dark')
-    const observer = new MutationObserver(() => {
-        isDark.value = document.documentElement.classList.contains('dark')
-    })
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    })
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("inscription");
+        window.location.href = "/";
+    };
 </script>
 
 <style scoped lang="css">
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    max-width: 1870px;
-    margin: 0 auto;
-    background-color: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 2rem;
-    z-index: 1000;
-    transition: background 0.3s;
-}
-
-.navbar.collapsed {
-    justify-content: flex-start;
-    position: absolute;
-    top: 1.65%;
-    left: 2.9%;
-}
-
-.logo-container {
-    margin-right: auto;
-    cursor: pointer;
-    perspective: 800px;
-}
-
-.logo-img {
-    height: 30px;
-    transition: opacity 0.3s ease;
-}
-
-.logo-img.flipping {
-    animation: flipLogo 0.6s ease forwards;
-}
-
-@keyframes flipLogo {
-    0% {
-        transform: rotateY(0deg);
-        opacity: 1;
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff26
     }
-    50% {
-        transform: rotateY(180deg);
-        opacity: 0;
+
+    .logo {
+        padding: 10px;
     }
-    100% {
-        transform: rotateY(360deg);
-        opacity: 1;
+
+    nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
-}
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    cursor: pointer;
-    opacity: 1;
-    padding-right: 2rem;
-    transition: opacity 1s ease;
-}
+    nav a {
+        color: black;
+        text-decoration: none;
+        padding: 0 40px;
+    }
 
-.nav-links img {
-    height: 30px;
-    transition: filter 0.3s ease;
-    filter: var(--nav-icon-filter);
-}
+    nav a:hover {
+        text-decoration: underline;
+    }
 
+    button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
 
-:deep(.dark) .nav-links img {
-    filter: invert(1);
-}
+    header nav {
+        box-shadow: none;
+    }
 
-:deep(:not(.dark)) .nav-links img {
-    filter: none;
-}
+    .hidden {
+        display: none !important;
+    }
 
-.navbar.collapsed .nav-links {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+    .logo {
+        padding: 10px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    nav a {
+        color: black;
+        text-decoration: none;
+        padding: 0 40px;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+    
+        50% {
+            background-position: 100% 50%;
+        }
+    
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 </style>
