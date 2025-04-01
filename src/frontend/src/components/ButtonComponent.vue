@@ -17,9 +17,12 @@
 <style scoped lang="css">
     button {
         padding: 10px 20px;
-        background-color: #ffffff26;
+        background-color: #f6121d66;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+    }
+    button:hover {
+        background-color: #f6121d99;
     }
 </style>

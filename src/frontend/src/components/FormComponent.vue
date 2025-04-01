@@ -42,8 +42,24 @@
     form {
         display: flex;
         background-color: rgba(255, 255, 255, 0.4);
-        padding: 3rem;
         justify-content: center;
         flex-direction: column;
     }
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    button {
+        margin: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #f6121d66;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #f6121d99;
+    }
+
 </style>
