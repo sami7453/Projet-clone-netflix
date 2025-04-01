@@ -1,30 +1,61 @@
 <template>
     <section>
-        <form id="inscription" class="apparition" @submit.prevent="handleSignup">
-          <label for="pres">Inscription :</label>
-          <div id="name">
-            <img src="../assets/images/personne.png" width="50" height="50" />
-            <input type="text" v-model="nom" placeholder="Nom" required />
-          </div>
-          <div id="firstname">
-            <img src="../assets/images/personne.png" width="50" height="50" />
-            <input type="text" v-model="prenom" placeholder="Prenom" required />
-          </div>
-          <div id="mail">
-            <img src="../assets/images/mail.png" width="50" height="50" />
-            <input type="email" v-model="email" placeholder="Email" required />
-          </div>
-          <div id="mdp">
-            <img src="../assets/images/mdp.png" width="65" height="65" />
-            <input type="password" v-model="password" placeholder="Password" required />
-          </div>
-          <button type="submit">Inscription</button>
-        </form>    
+        <FormComponent :data="formData" @form-change="onFormChange" />
+        <small>Already registered? <a href="">Login now</a></small>
     </section>
 </template>
 
 <script setup lang="ts">
+    import { reactive } from "vue";
+    import type FormInterface from "../interfaces/FormInterface";
+    import FormComponent from '../components/FormComponent.vue';
 
+    const formData = reactive<FormInterface>({
+        fields: [
+            {
+                id: 'name',
+                type: 'text',
+                placeholder: 'Enter your name',
+                labelTextContent: 'Name'
+            },
+            {
+                id: 'firstname',
+                type: 'text',
+                placeholder: 'Enter your first name',
+                labelTextContent: 'First Name'
+            },
+            {
+                id: 'mail',
+                type: 'email',
+                placeholder: 'Enter your email',
+                labelTextContent: 'Email'
+            },
+            {
+                id: 'mdp',
+                type: 'password',
+                placeholder: 'Enter your password',
+                labelTextContent: 'Password'
+            }
+        ],
+        buttons: [
+            {
+                id: 'submit-button',
+                type: 'submit',
+                textContent: 'Submit',
+                class: 'is-primary'
+            },
+            {
+                id: 'reset-button',
+                type: 'reset',
+                textContent: 'Reset',
+                class: 'is-danger'
+            }
+        ]
+    });
+
+    const onFormChange = () => {
+        console.log('Form changed!');
+    }
 </script>
 
 <style lang="css">

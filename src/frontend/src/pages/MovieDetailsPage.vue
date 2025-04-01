@@ -2,7 +2,6 @@
     <section class="poster">
         <img src="../assets/vue.svg" alt="Movie poster">
     </section>
-    
     <section class="infos">
         <h1>{{ title }}</h1>
         <div class="conteneur_liste">
@@ -36,10 +35,6 @@
 </script>
 
 <style lang="css">
-    main {
-        display: flex;
-        justify-content: space-around;
-    }
     .poster {
         width: 50%;
         display: flex;

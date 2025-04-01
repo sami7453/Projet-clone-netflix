@@ -24,6 +24,15 @@
     defineEmits(['field-change']);
 </script>
 
-<style lang="css">
-
+<style scoped lang="css">
+    input {
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 5px 5px 12px 5px;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 </style>

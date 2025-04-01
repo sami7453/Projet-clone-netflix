@@ -1,58 +1,70 @@
 <template>
     <section>
-        <form id="connexion" class="apparition" @submit.prevent="handleLogin">
-          <label for="pres">Connexion :</label>
-          <div id="mail">
-            <img src="../assets/images/mail.png" width="50" height="50" />
-            <input type="email" v-model="email" placeholder="Email" required />
-          </div>
-          <div id="mdp">
-            <img src="../assets/images/mdp.png" width="65" height="65" />
-            <input type="password" v-model="password" placeholder="Password" required />
-          </div>
-          <button type="submit">Connexion</button>
-        </form>
-    </section>
-
-    <section>
-        <div v-if="showConnexion" id="button_inscription" class="apparition">
-          <p>Vous n'avez pas encore de compte ?</p>
-          <button @click="toggleForms">Inscrivez-vous</button>
-        </div>
-        <div v-else id="button_connexion" class="apparition">
-          <p>Vous avez déjà un compte ?</p>
-          <button @click="toggleForms">Connectez-vous</button>
-        </div>
+        <FormComponent :data="formData" @form-change="onFormChange" />
+        <small>Not registered yet? <a href="">Register now</a></small>
     </section>
 </template>
 
 <script setup lang="ts">
-    import Form from "../components/FormComponent.vue";
+    import { reactive } from "vue";
+    import type FormInterface from "../interfaces/FormInterface";
+    import FormComponent from "../components/FormComponent.vue";
 
-  import { ref, onMounted } from 'vue';
-  
-  const showConnexion = ref(localStorage.getItem('inscription') !== 'true');
-  const email = ref('');
-  const password = ref('');
-  const nom = ref('');
-  const prenom = ref('');
-  
-  const toggleForms = () => {
-    showConnexion.value = !showConnexion.value;
-    localStorage.setItem('inscription', showConnexion.value ? 'false' : 'true');
-  };
-  
-  const handleLogin = () => {
-    console.log('Tentative de connexion avec', email.value, password.value);
-  };
-  
-  const handleSignup = () => {
-    console.log("Tentative d'inscription avec", nom.value, prenom.value, email.value, password.value);
-  };
-  
-  onMounted(() => {
-    showConnexion.value = localStorage.getItem('inscription') !== 'true';
-  });
+    const formData = reactive<FormInterface>({
+        fields: [
+            {
+                id: "email",
+                type: "email",
+                placeholder: "Enter your email",
+                labelTextContent: "Email"
+            },
+            {
+                id: "password",
+                type: "password",
+                placeholder: "Enter your password",
+                labelTextContent: "Password"
+            }
+        ],
+        buttons: [
+            {
+                id: "submit-button",
+                type: "submit",
+                textContent: "Submit",
+                class: "is-primary"
+            },
+            {
+                id: "reset-button",
+                type: "reset",
+                textContent: "Reset",
+                class: "is-danger"
+            }
+        ]
+    });
+
+    import { ref, onMounted } from "vue";
+    
+    const showConnexion = ref(localStorage.getItem("inscription") !== "true");
+    const email = ref("");
+    const password = ref("");
+    const nom = ref("");
+    const prenom = ref("");
+    
+    const toggleForms = () => {
+        showConnexion.value = !showConnexion.value;
+        localStorage.setItem("inscription", showConnexion.value ? "false" : "true");
+    };
+    
+    const handleLogin = () => {
+        console.log("Tentative de connexion avec", email.value, password.value);
+    };
+    
+    const handleSignup = () => {
+        console.log("Tentative d'inscription avec", nom.value, prenom.value, email.value, password.value);
+    };
+    
+    onMounted(() => {
+        showConnexion.value = localStorage.getItem("inscription") !== "true";
+    });
 </script>
   
 <style lang="css">
@@ -180,43 +192,6 @@
         margin-right: 20px;
     }
 
-    #mail img{
-        margin-top: 5px;
-        margin-left: 10px;
-        margin-right: 20px;
-    }
-    
-    #firstname {
-        padding: 10px;
-    }
-
-    #mdp, #mail, #name, #firstname {
-        display: flex;
-        justify-content: center;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 5px 5px 12px 5px;
-        align-items: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    #mdp  {
-        padding: 2px 2px 2px 2px;
-    }
-
-    #mdp input {
-        margin-bottom: 5px;
-    }
-
-    #mdp img {
-        border: none;
-        border-radius: 50%;
-        align-items: center;
-        margin-left: 10px;
-        margin-right: 20px;
-    }
-
     #inscription {
         display: flex;
         flex-direction: column;
@@ -269,69 +244,6 @@
         transform: scale(1.1);
         transition: 1s;
     }
-
-
-
-
-
-    #button_inscription{
-        align-items: center;
-        margin-top: 20px;
-    }
-    #button_inscription p{
-        color: #FFFFFF;
-    }
-    #button_inscription button{
-        padding: 10px 20px;
-        background-color: #ffffff26;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 1s;
-        margin: 10px;
-        font-size: 10px;
-        border-radius: 20px;
-        margin-left: 60px;
-    }
-    #button_inscription button:hover{
-        background-color: black;
-        transform: scale(1.1);
-        transition: 1s;
-    }
-    #button_connexion{
-        align-items: center;
-        margin-top: 20px;
-    }
-    #button_connexion p{
-        color: #FFFFFF;
-    }
-    #button_connexion button{
-        padding: 10px 20px;
-        background-color: #ffffff26;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 1s;
-        margin: 10px;
-        font-size: 10px;
-        border-radius: 20px;
-        margin-left: 30px;
-    }
-    #button_connexion button:hover{
-        background-color: black;
-        transform: scale(1.1);
-        transition: 1s;
-    }
-
-
-
-
-
-
-
-
 
     header.apparition{
         animation-delay: 0.2s;
