@@ -1,0 +1,28 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --nav-icon-filter: none;
+
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --nav-icon-filter: invert(1);
+}

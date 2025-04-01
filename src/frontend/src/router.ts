@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage.vue";
 import RegisterPage from "./pages/RegisterPage.vue";
 import SearchPage from "./pages/SearchPage.vue";
 import PlayerPage from "./pages/PlayerPage.vue";
+import UserPage from "./pages/UserPage.vue";
 import MovieDetailsPage from "./pages/MovieDetailsPage.vue";
 
 const router = createRouter({
@@ -28,6 +29,10 @@ const router = createRouter({
         {
             path: "/player",
             component: PlayerPage
+        },
+        {
+            path: "/user",
+            component: UserPage,
         },
         {
             path: "/movie-details",

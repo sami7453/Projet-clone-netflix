@@ -1,9 +1,8 @@
 <template>
-    <Header />
-    <main>
-        <RouterView />
-    </main>
-    <Footer />
+    <div>
+        <Header />
+        <router-view />
+    </div>
 </template>
 
 <script setup lang="ts">
