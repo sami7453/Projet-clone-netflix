@@ -1,3 +1,3 @@
-export interface Vignette {
-    titre: string;
+export default interface VignetteInterface {
+    title: string
 }

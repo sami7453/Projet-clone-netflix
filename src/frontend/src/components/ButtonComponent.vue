@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-    import type ButtonInterface from '../interfaces/ButtonInterface';
+    import type ButtonInterface from "../interfaces/ButtonInterface";
 
     interface ButtonComponentProperties {
         data: ButtonInterface
