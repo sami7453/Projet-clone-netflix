@@ -9,7 +9,10 @@ class Episode {
     }
 
     static async getEpisodeById(id) {
-        const result = await pool.query("SELECT * FROM episodes WHERE id = $1", [id]);
+        const result = await pool.query(
+            "SELECT * FROM episodes WHERE id = $1",
+            [id]
+        );
         return result.rows[0];
     }
 
@@ -30,7 +33,10 @@ class Episode {
     }
 
     static async deleteEpisode(id) {
-        await pool.query("DELETE FROM episodes WHERE id = $1", [id]);
+        await pool.query(
+            "DELETE FROM episodes WHERE id = $1",
+            [id]
+        );
     }
 }
 

@@ -9,7 +9,10 @@ class Actor {
     }
 
     static async getActorById(id) {
-        const result = await pool.query("SELECT * FROM actors WHERE id = $1", [id]);
+        const result = await pool.query(
+            "SELECT * FROM actors WHERE id = $1",
+            [id]
+        );
         return result.rows[0];
     }
 
@@ -30,7 +33,10 @@ class Actor {
     }
 
     static async deleteActor(id) {
-        await pool.query("DELETE FROM actors WHERE id = $1", [id]);
+        await pool.query(
+            "DELETE FROM actors WHERE id = $1",
+            [id]
+        );
     }
 
     // ----------------- EXTRA -----------------

@@ -1,9 +1,11 @@
-const Series = require('../models/series');
+const express = require("express");
+const router = express.Router();
+const Series = require("../models/series");
 
 // ----------------- CRUD -----------------
 
 // GET all series
-app.get('/series', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const series = await Series.getAllSeries();
         res.status(200).json(series);
@@ -13,21 +15,23 @@ app.get('/series', async (req, res) => {
 });
 
 // GET series by id
-app.get('/series/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const serie = await Series.getSerieById(req.params.id);
-        serie ? res.status(200).json(serie) : res.status(404).json({ message: 'Serie not found' });
+        serie
+            ? res.status(200).json(serie)
+            : res.status(404).json({ message: "Serie not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
 // POST serie
-app.post('/series', async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const { name, description, releaseDate, endDate, seasons, episodes, categories } = req.body;
         if (!name || !description || !releaseDate || !endDate || !seasons || !episodes || !categories) {
-            return res.status(400).json({ message: 'All fields are required' });
+            return res.status(400).json({ message: "All fields are required" });
         }
         const serie = await Series.createSerie({ name, description, releaseDate, endDate, seasons, episodes, categories });
         res.status(201).json(serie);
@@ -37,25 +41,31 @@ app.post('/series', async (req, res) => {
 });
 
 // PUT serie
-app.put('/series/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const { name, description, releaseDate, endDate, seasons, episodes, categories } = req.body;
         if (!name || !description || !releaseDate || !endDate || !seasons || !episodes || !categories) {
-            return res.status(400).json({ message: 'All fields are required' });
+            return res.status(400).json({ message: "All fields are required" });
         }
         const serie = await Series.updateSerie(req.params.id, { name, description, releaseDate, endDate, seasons, episodes, categories });
-        serie ? res.status(200).json(serie) : res.status(404).json({ message: 'Serie not found' });
+        serie
+            ? res.status(200).json(serie)
+            : res.status(404).json({ message: "Serie not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
 // DELETE serie
-app.delete('/series/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const serie = await Series.deleteSerie(req.params.id);
-        serie ? res.status(200).json(serie) : res.status(404).json({ message: 'Serie not found' });
+        serie
+            ? res.status(200).json(serie)
+            : res.status(404).json({ message: "Serie not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+module.exports = router;

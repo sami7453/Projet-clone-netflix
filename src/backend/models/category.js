@@ -32,8 +32,11 @@ class Category {
         return result.rows[0];
     }
 
-    static async deleteCategorie(id) {
-        await pool.query("DELETE FROM categories WHERE id = $1", [id]);
+    static async deleteCategory(id) {
+        await pool.query(
+            "DELETE FROM categories WHERE id = $1",
+            [id]
+        );
     }
 }
 

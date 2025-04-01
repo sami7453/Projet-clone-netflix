@@ -9,7 +9,10 @@ class History {
     }
 
     static async getHistoryById(id) {
-        const result = await pool.query("SELECT * FROM history WHERE id = $1", [id]);
+        const result = await pool.query(
+            "SELECT * FROM history WHERE id = $1",
+            [id]
+        );
         return result.rows[0];
     }
 
@@ -30,7 +33,10 @@ class History {
     }
 
     static async deleteHistory(id) {
-        const result = await pool.query("DELETE FROM history WHERE id = $1", [id]);
+        const result = await pool.query(
+            "DELETE FROM history WHERE id = $1",
+            [id]
+        );
         return result.rowCount;
     }
 }

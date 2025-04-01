@@ -9,7 +9,10 @@ class Movie {
     }
 
     static async getMovieById(id) {
-        const result = await pool.query("SELECT * FROM movies WHERE id = $1", [id]);
+        const result = await pool.query(
+            "SELECT * FROM movies WHERE id = $1",
+            [id]
+        );
         return result.rows[0];
     }
 
@@ -30,7 +33,10 @@ class Movie {
     }
 
     static async deleteMovie(id) {
-        await pool.query("DELETE FROM movies WHERE id = $1 RETURNING *", [id]);
+        await pool.query(
+            "DELETE FROM movies WHERE id = $1 RETURNING *",
+            [id]
+        );
     }
 
     // ----------------- EXTRA -----------------

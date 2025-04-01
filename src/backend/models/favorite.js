@@ -9,7 +9,10 @@ class Favorite {
     }
 
     static async getFavoriteById(id) {
-        const result = await pool.query("SELECT * FROM favorites WHERE id = $1", [id]);
+        const result = await pool.query(
+            "SELECT * FROM favorites WHERE id = $1",
+            [id]
+        );
         return result.rows[0];
     }
 
@@ -30,7 +33,10 @@ class Favorite {
     }
 
     static async deleteFavorite(id) {
-        pool.query("DELETE FROM favorites WHERE id = $1", [id]);
+        pool.query(
+            "DELETE FROM favorites WHERE id = $1",
+            [id]
+        );
     }
 }
 
