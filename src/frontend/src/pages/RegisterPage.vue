@@ -11,6 +11,7 @@
     import FormComponent from '../components/FormComponent.vue';
 
     const formData = reactive<FormInterface>({
+        title: "Register",
         fields: [
             {
                 id: 'name',
@@ -58,6 +59,6 @@
     }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 
 </style>

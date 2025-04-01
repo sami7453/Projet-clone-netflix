@@ -1,6 +1,9 @@
 <template>
     <form>
         <section>
+            <h3>{{ data.title }}</h3>
+        </section>
+        <section>
             <FieldComponent
                 @field-change="onFieldChange"
                 v-for="(field, index) in data.fields"
@@ -35,6 +38,12 @@
     }
 </script>
 
-<style lang="css">
-
+<style scoped lang="css">
+    form {
+        display: flex;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 3rem;
+        justify-content: center;
+        flex-direction: column;
+    }
 </style>

@@ -5,6 +5,7 @@
             :id="data.id"
             :type="data.type ? data.type : 'text'"
             :class="data.class ? data.class : ''"
+            :placeholder="data.placeholder ? data.placeholder : ''"
             @input="(event:any) => $emit('field-change', {
                 id: data.id,
                 value: event.target!.value
@@ -29,10 +30,10 @@
         display: flex;
         justify-content: center;
         border: 1px solid black;
-        border-radius: 10px;
-        padding: 5px 5px 12px 5px;
+        border-radius: 6px;
+        padding: 10px;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 20px;
     }
 </style>

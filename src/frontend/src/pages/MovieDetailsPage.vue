@@ -4,37 +4,37 @@
     </section>
     <section class="infos">
         <h1>{{ title }}</h1>
-        <div class="conteneur_liste">
+        <div class="episode-list">
             <Vignette v-for="(season, index) in seasons" :key="index" :vignette="season" />
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
+    import { ref, onMounted } from "vue";
     import Vignette from "../components/VignetteComponent.vue";
     import type VignetteInterface from "../interfaces/VignetteInterface";
 
-    const title = "Breaking Bad";
-    const seasons: VignetteInterface[] = [
-        {
-            title: "Saison 1",
-            poster: "../assets/vue.svg",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc tincidunt tincidunt"
-        },
-        {
-            title: "Saison 2",
-            poster: "../assets/vue.svg", // Example image, adjust as necessary
-            description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        },
-        {
-            title: "Saison 3",
-            poster: "../assets/vue.svg", // Example image, adjust as necessary
-            description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    const title = ref("Breaking Bad");
+    const seasons = ref<VignetteInterface[]>([]);
+
+    onMounted(async () => {
+        try {
+            const response = await fetch("");
+            const data = await response.json();
+
+            seasons.value = data.seasons.map((season: any) => ({
+                title: season.name,
+                poster: ``,
+                description: season.overview || "Description non disponible"
+            }));
+        } catch (error) {
+            console.log(error);
         }
-    ];
+    });
 </script>
 
-<style lang="css">
+<style scoped lang="css">
     .poster {
         width: 50%;
         display: flex;
@@ -57,7 +57,6 @@
         align-items: center;
         scroll-behavior: smooth;
         overflow-y: auto;
-        height: 100vh;
     }
 
     .infos h1 {
@@ -65,7 +64,7 @@
         text-align: center;
     }
 
-    .conteneur_liste {
+    .episode-list {
         display: flex;
         flex-direction: column;
         justify-content: center;
