@@ -74,20 +74,9 @@
         display: none !important;
     }
 
-    header {
-        /* background-color: #6e0000;
-        opacity: 0.4; */
-        background-color: #6c7c8c5f
-        
-    }
+   
 
-    header nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
+    
 
     #image img {
         margin-left: 100px;
@@ -338,19 +327,7 @@
 
 
 
-    footer{
-        /* background-color: #6e0000; */
-        background-color: #6c7c8c5f;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    footer p{
-        color: white;
-        font-size: 40px;
-    }
+
 
 
 
