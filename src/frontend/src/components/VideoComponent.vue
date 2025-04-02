@@ -15,7 +15,7 @@
 						</div>
 						<p class="description">{{ data.description }}</p>
 						<div class="actions">
-							<RouterLink :to="`/player/${props.data.id}`">
+							<RouterLink :to="`/player/series/${props.data.id}`">
 								<button class="play">▶</button>
 							</RouterLink>
 							<button>✔</button>
