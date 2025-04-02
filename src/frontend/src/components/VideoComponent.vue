@@ -1,21 +1,21 @@
 <template>
     <article class="mini-card" ref="cardRef" @mouseenter="onHover" @mouseleave="onLeave">
-		<img :src="item.poster" :alt="item.title" class="thumb" />
+		<img :src="data.poster" :alt="data.title" class="thumb" />
 		<teleport to="body">
 			<transition name="fade-scale">
 				<div v-if="hover" class="card-expanded" :style="fixedStyle" @mouseenter="onHover" @mouseleave="onLeave">
-					<img :src="item.poster" :alt="item.title" class="preview" />
+					<img :src="data.poster" :alt="data.title" class="preview" />
 					<div class="info">
-						<h3>{{ item.title }}</h3>
+						<h3>{{ data.title }}</h3>
 						<div class="meta">
-							<span>{{ formatDate(item.release_date) }}</span>
-							<span>+{{ item.age_limit }}</span>
-							<span>{{ item.duration }}</span>
-							<span>{{ item.quality }}</span>
+							<span>{{ formatDate(data.release_date) }}</span>
+							<span>+{{ data.age_limit }}</span>
+							<span>{{ data.duration }}</span>
+							<span>{{ data.quality }}</span>
 						</div>
-						<p class="description">{{ item.description }}</p>
+						<p class="description">{{ data.description }}</p>
 						<div class="actions">
-							<RouterLink :to="`/player/${props.item.id}`">
+							<RouterLink :to="`/player/${props.data.id}`">
 								<button class="play">▶</button>
 							</RouterLink>
 							<button>✔</button>
@@ -31,10 +31,10 @@
 
 <script setup lang="ts">
 	import { ref } from "vue";
-	import type VideoCardInterface from "../interfaces/VideoCardInterface";
+	import type VideoCardInterface from "../interfaces/VideoInterface";
 
 	interface CardComponentProperties {
-		item: VideoCardInterface
+		data: VideoCardInterface
 	}
 
 	const props = defineProps<CardComponentProperties>();
@@ -55,7 +55,7 @@
 
 	const bookmarkVideo = async () => {
 		try {
-			const response = await fetch(`http://localhost:3000/bookmarks/${1}/${props.item.id}}`, {
+			const response = await fetch(`http://localhost:3000/bookmarks/${1}/${props.data.id}}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 			});

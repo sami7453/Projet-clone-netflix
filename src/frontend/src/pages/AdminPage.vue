@@ -1,20 +1,16 @@
 <template>
-    <section>
+    <section class="support-tickets">
         <h2>Support Tickets</h2>
-        <ul v-if="supportTickets.length > 0">
-            <li v-for="ticket in supportTickets" :key="ticket.id">
-                <h3>{{ ticket.title }}</h3>
-                <p>{{ ticket.description }}</p>
-                <p>{{ ticket.open_date }}</p>
-                <p>{{ ticket.close_date ? ticket.close_date : 'Ongoing issue' }}</p>
-            </li>
-        </ul>
+        <div v-if="supportTickets.length > 0">
+            <SupportTicketComponent v-for="supportTicket in supportTickets" :key="supportTicket.id" :data="supportTicket" />
+        </div>
         <p v-else>No support ticket available at the moment.</p>
     </section>
 </template>
 
 <script setup lang="ts">
     import { ref, onMounted } from "vue";
+    import SupportTicketComponent from "../components/SupportTicketComponent.vue";
     import type SupportTicketInterface from "../interfaces/SupportTicketInterface";
 
     const supportTickets = ref<SupportTicketInterface[]>([]);
@@ -22,6 +18,7 @@
     const fetchSupportTickets = async () => {
         try {
             const response = await fetch("http://localhost:3000/support-tickets");
+            if (!response.ok) { throw new Error("Failed to fetch support tickets"); }
             supportTickets.value = await response.json();
         } catch (error) {
             console.error("Error fetching support tickets:", error);
@@ -33,12 +30,13 @@
 
 <style scoped lang="css">
     section {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 8px;
+        max-width: 60%;
+        max-height: fit-content;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
     }
 
     h2 {

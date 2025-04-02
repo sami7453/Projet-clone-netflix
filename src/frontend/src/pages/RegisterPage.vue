@@ -10,7 +10,6 @@
     import FormComponent from "../components/FormComponent.vue";
     import type FormInterface from "../interfaces/FormInterface";
 
-
     const formData = reactive<FormInterface>({
         title: "Register",
         fields: [

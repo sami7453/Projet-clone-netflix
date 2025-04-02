@@ -1,7 +1,7 @@
 <template>
     <form>
         <section>
-            <h3>{{ data.title }}</h3>
+            <h2>{{ data.title }}</h2>
         </section>
         <section>
             <FieldComponent v-for="(field, index) in data.fields" :key="index" :data="field" />
@@ -32,7 +32,7 @@
         flex-direction: column;
     }
 
-    h3 {
+    h2 {
         font-size: 2rem;
         margin-bottom: 2rem;
         text-align: center;

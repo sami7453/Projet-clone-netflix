@@ -14,8 +14,11 @@
 </template>
 
 <script setup lang="ts">
+    import { useRouter } from "vue-router";
     import ButtonComponent from "../components/ButtonComponent.vue";
     import type ButtonInterface from "../interfaces/ButtonInterface";
+
+    const router = useRouter();
 
     const buttonProfileData: ButtonInterface = {
         id: "profile-btn",
@@ -33,14 +36,14 @@
 
     const handleProfile = () => {
         // TODO: Vérifier si l'utilisateur est connecté
-        window.location.href = `/#/profile`;
+        router.push("/profile");
     };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("inscription");
-        window.location.href = "/";
+        router.push("/");
     };
 </script>
 

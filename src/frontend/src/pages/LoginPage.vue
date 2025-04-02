@@ -36,7 +36,7 @@
         max-height: fit-content;
         margin: 3rem auto;
         padding: 2rem;
-        background-color: #ffffff;
+        background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
     }

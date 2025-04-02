@@ -11,7 +11,7 @@
     <section class="bookmarks">
         <h2>Bookmarks</h2>
         <CarouselComponent v-if="bookmarks.length > 0">
-            <VideoCardComponent v-for="item in bookmarks" :key="item.id" :item="item" />
+            <VideoComponent v-for="bookmark in bookmarks" :key="bookmark.id" :data="bookmark" />
         </CarouselComponent>
         <p v-else>Start bookmarking movies or series now.</p>
     </section>
@@ -19,7 +19,7 @@
     <section class="history">
         <h2>History</h2>
         <CarouselComponent v-if="history.length > 0">
-            <VideoCardComponent v-for="item in history" :key="item.id" :item="item" />
+            <VideoComponent v-for="historyRecord in history" :key="historyRecord.id" :data="historyRecord" />
         </CarouselComponent>
         <p v-else>Start watching movies or series now.</p>
     </section>
@@ -37,11 +37,11 @@
     import { ref, reactive, onMounted } from "vue";
     import ButtonComponent from "../components/ButtonComponent.vue";
     import FormComponent from "../components/FormComponent.vue";
-    import VideoCardComponent from "../components/VideoCardComponent.vue";
+    import VideoComponent from "../components/VideoComponent.vue";
     import CarouselComponent from "../components/CarouselComponent.vue";
     import type FormInterface from "../interfaces/FormInterface";
     import type ButtonInterface from "../interfaces/ButtonInterface";
-    import type VideoCardInterface from "../interfaces/VideoCardInterface";
+    import type VideoInterface from "../interfaces/VideoInterface";
 
     const user = ref({
         id: 1,
@@ -54,8 +54,8 @@
     const editPseudo = ref(user.value.username);
     const editEmail = ref(user.value.email);
     
-    const history = ref<VideoCardInterface[]>([]);
-    const bookmarks = ref<VideoCardInterface[]>([]);
+    const history = ref<VideoInterface[]>([]);
+    const bookmarks = ref<VideoInterface[]>([]);
 
     const fetchBookmarks = async () => {
         try {
