@@ -41,7 +41,6 @@ router.post("/", async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Remapper first_name et last_name aux clés attendues par createUser et fixer role à "user"
         const newUser = await User.createUser({
             firstName: first_name,
             lastName: last_name,
@@ -55,11 +54,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-
-
 // ----------------- EXTRA -----------------
-
-// TODO
 
 router.post("/login", async (req, res) => {
     try {
@@ -79,7 +74,6 @@ router.post("/login", async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        // On renvoie également les infos utilisateur (en utilisant user.first_name comme username)
         res.status(200).json({
             message: "Login successful",
             token,
@@ -93,8 +87,6 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
-
 
 router.post("/logout", async (req, res) => {
 

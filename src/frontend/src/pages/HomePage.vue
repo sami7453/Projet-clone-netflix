@@ -10,7 +10,7 @@
     <section v-for="category in categories" :key="category.name" class="carousel-section">
         <h2>{{ category.name }}</h2>
         <CarouselComponent v-if="category.items.length > 0">
-            <VideoCardComponent v-for="item in category.items" :key="item.id" :data="item" />
+            <VideComponent v-for="item in category.items" :key="item.id" :data="item" />
         </CarouselComponent>
         <p v-else>No movies or series available at the moment.</p>
     </section>
@@ -19,7 +19,7 @@
 <script setup lang="ts">
     import { ref, onMounted } from "vue";
     import ButtonComponent from "../components/ButtonComponent.vue";
-    import VideoCardComponent from "../components/VideoComponent.vue";
+    import VideComponent from "../components/VideoComponent.vue";
     import CarouselComponent from "../components/CarouselComponent.vue";
     import type ButtonInterface from "../interfaces/ButtonInterface";
 
