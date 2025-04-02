@@ -1,12 +1,18 @@
 <template>
     <section>
-        <video></video>
+        <video controls></video>
     </section>
     <section class="ratings">
-        <p v-for="item in ratings" :key="item">{{ item }}</p>
+        <h3>Ratings</h3>
+        <ul>
+            <li v-for="item in ratings" :key="item">{{ item.rating }}/5: {{ item.description }}</li>
+        </ul>
     </section>
     <section class="actors">
-        <p v-for="item in actors" :key="item">{{ item }}</p>
+        <h3>Actors</h3>
+        <ul>
+            <li v-for="item in actors" :key="item">{{ item.first_name }} {{ item.last_name }}</li>
+        </ul>
     </section>
 </template>
 
@@ -15,8 +21,8 @@
     import { useRoute } from "vue-router";
 
     const route = useRoute();
-    const ratings = ref<string[]>([]);
-    const actors = ref<string[]>([]);
+    const ratings = ref<string>();
+    const actors = ref<string>();
 
     const fetchRatings = async () => {
         try {
