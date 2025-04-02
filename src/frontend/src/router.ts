@@ -4,7 +4,9 @@ import LoginPage from "./pages/LoginPage.vue";
 import RegisterPage from "./pages/RegisterPage.vue";
 import PlayerPage from "./pages/PlayerPage.vue";
 import UserPage from "./pages/UserPage.vue";
-import MovieDetailsPage from "./pages/MovieDetailsPage.vue";
+import MoviesPage from "./pages/MoviesPage.vue";
+import SeriesPage from "./pages/SeriesPage.vue";
+import NotFoundPage from "./pages/NotFoundPage.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -22,16 +24,24 @@ const router = createRouter({
             component: RegisterPage
         },
         {
-            path: "/player",
-            component: PlayerPage
+            path: "/movies",
+            component: MoviesPage
+        },
+        {
+            path: "/series",
+            component: SeriesPage
         },
         {
             path: "/user",
             component: UserPage,
         },
         {
-            path: "/movie-details/:id",
-            component: MovieDetailsPage
+            path: "/player/:id",
+            component: PlayerPage
+        },
+        {
+            path: "/:pathMatch(.*)*",
+            component: NotFoundPage
         }
     ]
 });

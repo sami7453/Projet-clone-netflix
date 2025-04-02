@@ -10,6 +10,3 @@
     import HeaderComponent from "./components/HeaderComponent.vue";
     import FooterComponent from "./components/FooterComponent.vue";
 </script>
-
-<style lang="css">
-</style>

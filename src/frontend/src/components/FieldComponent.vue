@@ -5,6 +5,7 @@
             :id="data.id"
             :type="data.type ? data.type : 'text'"
             :class="data.class ? data.class : ''"
+            :required="data.required ? data.required : false"
             :placeholder="data.placeholder ? data.placeholder : ''"
             @input="(event:any) => $emit('field-change', {
                 id: data.id,
@@ -22,7 +23,7 @@
     }
 
     defineProps<FieldComponentProperties>();
-    defineEmits(['field-change']);
+    defineEmits(["field-change"]);
 </script>
 
 <style scoped lang="css">

@@ -16,10 +16,18 @@ class User {
         return result.rows[0];
     }
 
-    static async createUser({ name, lastName, email, password }) {
+    static async getUserByEmail(email) {
         const result = await pool.query(
-            "INSERT INTO users (name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
-            [name, lastName, email, password]
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
+        return result.rows[0];
+    }
+
+    static async createUser({ firstName, lastName, email, password }) {
+        const result = await pool.query(
+            "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+            [firstName, lastName, email, password]
         );
         return result.rows[0];
     }

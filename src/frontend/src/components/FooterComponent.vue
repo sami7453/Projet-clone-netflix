@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div class="footer-content">
+        <div>
             <p>© 2025 Reviver. All rights reserved.</p>
             <div class="socials">
                 <a href="#">Instagram</a>
@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-
 </script>
 
 <style scoped lang="css">
@@ -25,7 +24,7 @@
         border-top: 1px solid #333;
     }
 
-    .footer-content {
+    footer div {
         display: flex;
         justify-content: space-between;
         align-items: center;

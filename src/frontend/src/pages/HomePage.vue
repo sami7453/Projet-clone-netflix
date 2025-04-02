@@ -1,75 +1,65 @@
 <template>
-    <section class="homepage">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Severance</h1>
-                <p>Hit series</p>
-                <button>Watch now</button>
-            </div>
-        </section>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Severance</h1>
+            <p>Hit series</p>
+            <ButtonComponent :data="watchNowButtonData"/>
+        </div>
+    </section>
 
-        <section v-for="category in categories" :key="category.name" class="carousel-section">
-            <h2>{{ category.name }}</h2>
-            <CarouselWrapper>
-                <Card v-for="item in category.items" :key="item.id" :item="item" />
-            </CarouselWrapper>
-        </section>
+    <section v-for="category in categories" :key="category.name" class="carousel-section">
+        <h2>{{ category.name }}</h2>
+        <CarouselComponent v-if="category.items.length > 0">
+            <VideoCardComponent v-for="item in category.items" :key="item.id" :item="item" />
+        </CarouselComponent>
+        <p v-else>No movies or series available at the moment.</p>
     </section>
 </template>
 
 <script setup lang="ts">
-    import Card from '../components/Card.vue'
-    import CarouselWrapper from '../components/CarouselWrapper.vue'
+    import { ref, onMounted } from "vue";
+    import ButtonComponent from "../components/ButtonComponent.vue";
+    import VideoCardComponent from "../components/VideoCardComponent.vue";
+    import CarouselComponent from "../components/CarouselComponent.vue";
+    import type ButtonInterface from "../interfaces/ButtonInterface";
 
-    // import { ref, onMounted } from 'vue'
+    const watchNowButtonData: ButtonInterface = {
+        id: "watch-now-button",
+        textContent: "Watch now",
+        class: "watch-now",
+        type: "button"
+    }
 
-    // const categories = ref([])
+    const categories = ref([
+        { name: "Trending", items: [] },
+        { name: "For you", items: [] }
+    ]);
 
-    // onMounted(async () => {
-    //   const res = await fetch('http://localhost:3000/api/categories')
-    //   categories.value = await res.json()
-    // })
+    const fetchMovies = async () => {
+        try {
+            const [trendingResponse, recommendedResponse] = await Promise.all([
+                fetch("http://localhost:3001/movies/trending"),
+                fetch("http://localhost:3001/movies/recommended")
+            ]);
 
-    // Sinon avec Express:
-    // app.get('/api/categories', async (req, res) => {
-    //   const categories = await db.query('SELECT * FROM categories_with_items');
-    //   res.json(categories.rows);
-    // });
+            const trendingMovies = await trendingResponse.json();
+            const recommendedMovies = await recommendedResponse.json();
 
-    const categories = [
-        {
-            name: 'Tendances actuelles',
-            items: Array.from({ length: 18 }, (_, i) => ({
-                id: i + 1,
-                title: `Film ${i + 1}`,
-                image: '/assets/hero-banner.jpg',
-            })),
-        },
-        {
-            name: 'Recommandé pour vous',
-            items: [
-                { id: 19, title: 'Le Seigneur des Imports', image: '/assets/hero-banner.jpg' },
-                { id: 20, title: 'Stranger Bugs', image: '/assets/hero-banner.jpg' },
-                { id: 21, title: 'You vs Vue', image: '/assets/hero-banner.jpg' },
-            ],
-        },
-    ]
+            categories.value[0].items = trendingMovies;
+            categories.value[1].items = recommendedMovies;
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+        }
+    };
+
+    onMounted(fetchMovies);
 </script>
 
 <style scoped lang="css">
-    .homepage {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-
     .hero {
         width: 100%;
         height: 100vh;
-        background: url('../assets/hero-banner.jpg') no-repeat center center/cover;
+        background: url("../assets/hero-banner.jpg") no-repeat center center/cover;
         display: flex;
         align-items: flex-end;
         justify-content: flex-start;
@@ -80,7 +70,7 @@
     }
 
     .hero::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
@@ -100,21 +90,6 @@
     .hero-content p {
         font-size: 1.2rem;
         margin-bottom: 2rem;
-    }
-
-    .hero-content button {
-        background: #e50914;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    .hero-content button:hover {
-        background: #f6121d;
     }
 
     .carousel-section {

@@ -65,18 +65,18 @@ router.delete("/:id", async (req, res) => {
 
 // ----------------- EXTRA -----------------
 
-router.get("/movies/:movie_id", async (req, res) => {
+router.get("/movies/:id", async (req, res) => {
     try {
-        const actors = await Actor.getActorsByMovieId(req.params.movie_id);
+        const actors = await Actor.getActorsByMovieId(req.params.id);
         res.status(200).json(actors);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-router.get("/series/:series_id", async (req, res) => {
+router.get("/series/:id", async (req, res) => {
     try {
-        const actors = await Actor.getActorsBySeriesId(req.params.series_id);
+        const actors = await Actor.getActorsBySeriesId(req.params.id);
         res.status(200).json(actors);
     } catch (err) {
         res.status(500).json({ message: err.message });

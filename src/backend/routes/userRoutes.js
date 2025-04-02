@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
 // ----------------- CRUD -----------------
 
 router.get("/", async (req, res) => {
@@ -30,8 +33,16 @@ router.post("/", async (req, res) => {
         if (!first_name || !last_name || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        const user = await User.createUser({ first_name, last_name, email, password });
-        res.status(201).json(user);
+
+        const user = await User.getUserByEmail(email);
+        if (user) {
+            res.status(400).json({ message: "User already exists" });
+            return;
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.createUser({ first_name, last_name, email, password: hashedPassword });
+        res.status(201).json({ message: "User registered successfully", newUser });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -52,11 +63,33 @@ router.delete("/:id", async (req, res) => {
 
 // TODO
 
-router.post("/register", async (req, res) => {});
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
 
-router.post("/login", async (req, res) => {});
+        const user = await User.getUserByEmail(email);
+        if (!user || !bcrypt.compareSync(password, user.password)) {
+            return res.status(401).json({ error: "Invalid credentials" });
+        }
 
-router.post("/logout", async (req, res) => {});
+        const token = jwt.sign(
+            { userId: user.rows[0].id, email: user.rows[0].email },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ message: "Login successful", token });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.post("/logout", async (req, res) => {
+
+});
 
 router.patch("/:id/first_name", async (req, res) => {});
 

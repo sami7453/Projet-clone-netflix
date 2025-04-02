@@ -1,22 +1,13 @@
 <template>
-    <form>
+    <form v-on:submit="onSubmit">
         <section>
             <h3>{{ data.title }}</h3>
         </section>
         <section>
-            <FieldComponent
-                @field-change="onFieldChange"
-                v-for="(field, index) in data.fields"
-                :key="index"
-                :data="field"
-            />
+            <FieldComponent v-for="(field, index) in data.fields" :key="index" :data="field" />
         </section>
         <section>
-            <ButtonComponent
-                v-for="(button, index) in data.buttons"
-                :key="index"
-                :data="button"
-            />
+            <ButtonComponent v-for="(button, index) in data.buttons" :key="index" :data="button" />
         </section>
     </form>
 </template>
@@ -31,11 +22,6 @@
     }
 
     defineProps<FormComponentProperties>();
-
-    const onFieldChange = ({ id, val }:{ id: string, val:string }) => {
-        console.log('id', id)
-        console.log('val', val)
-    }
 </script>
 
 <style scoped lang="css">
@@ -45,21 +31,10 @@
         justify-content: center;
         flex-direction: column;
     }
+
     h3 {
         font-size: 2rem;
         margin-bottom: 2rem;
         text-align: center;
     }
-    button {
-        margin: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: #f6121d66;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #f6121d99;
-    }
-
 </style>

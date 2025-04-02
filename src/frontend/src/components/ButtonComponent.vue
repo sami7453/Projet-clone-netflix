@@ -16,13 +16,17 @@
 
 <style scoped lang="css">
     button {
-        padding: 10px 20px;
-        background-color: #f6121d66;
+        background: #e50914;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
         border: none;
-        border-radius: 5px;
+        border-radius: 4px;
         cursor: pointer;
+        transition: background 0.3s;
     }
+
     button:hover {
-        background-color: #f6121d99;
+        background: #f6121d;
     }
 </style>
