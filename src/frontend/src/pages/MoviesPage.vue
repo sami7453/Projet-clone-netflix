@@ -2,7 +2,7 @@
     <section>
         <h2>Movies</h2>
         <CarouselComponent v-if="movies.length > 0">
-            <VideoCardComponent v-for="movie in movies" :key="movie.id" :data="movie" />
+            <VideoComponent v-for="movie in movies" :key="movie.id" :data="movie" />
         </CarouselComponent>
         <p v-else>No movies available at the moment.</p>
     </section>
@@ -10,11 +10,11 @@
 
 <script setup lang="ts">
     import { ref, onMounted } from "vue";
-    import VideoCardComponent from "../components/VideoComponent.vue";
+    import VideoComponent from "../components/VideoComponent.vue";
     import CarouselComponent from "../components/CarouselComponent.vue";
-    import type VideoCardInterface from "../interfaces/VideoInterface";
+    import type VideoInterface from "../interfaces/VideoInterface";
 
-    const movies = ref<VideoCardInterface[]>([]);
+    const movies = ref<VideoInterface[]>([]);
 
     const fetchMovies = async () => {
         try {
@@ -34,3 +34,4 @@
         padding: 3rem;
     }
 </style>
+ 

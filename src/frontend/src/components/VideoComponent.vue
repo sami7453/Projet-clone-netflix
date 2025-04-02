@@ -31,13 +31,13 @@
 
 <script setup lang="ts">
 	import { ref } from "vue";
-	import type VideoCardInterface from "../interfaces/VideoInterface";
+	import type VideoInterface from "../interfaces/VideoInterface";
 
-	interface CardComponentProperties {
-		data: VideoCardInterface
+	interface VideoComponentProperties {
+		data: VideoInterface
 	}
 
-	const props = defineProps<CardComponentProperties>();
+	const props = defineProps<VideoComponentProperties>();
 	
 	const hover = ref(false);
 	const cardRef = ref<HTMLElement | null>(null);

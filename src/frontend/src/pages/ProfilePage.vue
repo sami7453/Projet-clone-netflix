@@ -44,7 +44,7 @@
     import CarouselComponent from "../components/CarouselComponent.vue";
     import type FormInterface from "../interfaces/FormInterface";
     import type ButtonInterface from "../interfaces/ButtonInterface";
-    import type VideoCardInterface from "../interfaces/VideoInterface";
+    import type VideoInterface from "../interfaces/VideoInterface";
     
     const user = ref({
         id: null,
@@ -55,7 +55,7 @@
     onMounted(() => {
         isDark.value = localStorage.getItem("theme") === "dark";
         applyTheme();
-        
+
         const storedUser = localStorage.getItem("user");
         if (storedUser && storedUser !== "undefined") {
             user.value = JSON.parse(storedUser);
@@ -72,8 +72,8 @@
     const editPseudo = ref(user.value.username);
     const editEmail = ref(user.value.email);
     
-    const history = ref<VideoCardInterface[]>([]);
-    const bookmarks = ref<VideoCardInterface[]>([]);
+    const history = ref<VideoInterface[]>([]);
+    const bookmarks = ref<VideoInterface[]>([]);
     
     const fetchBookmarks = async () => {
         try {
