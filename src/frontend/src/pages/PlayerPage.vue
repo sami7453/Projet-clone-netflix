@@ -55,5 +55,46 @@
 </script>
 
 <style scoped lang="css">
-    
+    section {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    video {
+        width: 100%;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: left;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding: 10px;
+        background: white;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .ratings li,
+    .actors li {
+        border-left: 5px solid #e50914;
+    }
 </style>

@@ -7,8 +7,8 @@
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/movies">Movies</RouterLink>
             <RouterLink to="/series">Series</RouterLink>
-            <ButtonComponent :data="buttonLogoutData" @click="handleLogout" />
             <ButtonComponent :data="buttonProfileData" @click="handleProfile" />
+            <ButtonComponent :data="buttonLogoutData" @click="handleLogout" />
         </nav>
     </header>
 </template>
@@ -17,18 +17,18 @@
     import ButtonComponent from "../components/ButtonComponent.vue";
     import type ButtonInterface from "../interfaces/ButtonInterface";
 
-    const buttonLogoutData: ButtonInterface = {
-        id: "logout-btn",
-        type: "button",
-        class: "",
-        textContent: "Logout"
-    };
-
     const buttonProfileData: ButtonInterface = {
         id: "profile-btn",
         type: "button",
         class: "",
         textContent: "Profile"
+    };
+    
+    const buttonLogoutData: ButtonInterface = {
+        id: "logout-btn",
+        type: "button",
+        class: "",
+        textContent: "Logout"
     };
 
     const handleProfile = () => {
@@ -51,30 +51,29 @@
         align-items: center;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         background-color: var(--bg-color);
-    }
-
-    .logo {
-        padding: 10px;
+        width: 95%;
+        margin: auto;
     }
 
     nav {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        gap: 10px;
     }
 
     nav a {
         color: black;
         text-decoration: none;
-        padding: 0 40px;
+        padding: 0 30px;
     }
 
     nav a:hover {
         text-decoration: underline;
     }
 
-    header nav {
-        box-shadow: none;
+    .logo {
+        padding: 10px;
     }
 
     .hidden {
@@ -83,16 +82,5 @@
 
     .logo {
         padding: 10px;
-    }
-
-    nav {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    nav a {
-        color: black;
-        text-decoration: none;
-        padding: 0 40px;
     }
 </style>

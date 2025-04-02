@@ -58,7 +58,7 @@
 <style scoped lang="css">
     .hero {
         width: 100%;
-        height: 100vh;
+        height: 90vh;
         background: url("../assets/hero-banner.jpg") no-repeat center center/cover;
         display: flex;
         align-items: flex-end;

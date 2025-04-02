@@ -4,7 +4,7 @@
             <p>© 2025 Reviver. All rights reserved.</p>
             <div class="socials">
                 <a href="#">Instagram</a>
-                <a href="#">Twitter</a>
+                <a href="#">X</a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">YouTube</a>
             </div>
         </div>

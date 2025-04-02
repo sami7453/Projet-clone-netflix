@@ -30,6 +30,6 @@
 
 <style scoped lang="css">
     section {
-        padding: 4rem;
+        padding: 3rem;
     }
 </style>
