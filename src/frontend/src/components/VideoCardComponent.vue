@@ -8,19 +8,19 @@
 					<div class="info">
 						<h3>{{ item.title }}</h3>
 						<div class="meta">
-							<span>{{ item.release_date }}</span>
+							<span>{{ formatDate(item.release_date) }}</span>
 							<span>+{{ item.age_limit }}</span>
 							<span>{{ item.duration }}</span>
 							<span>{{ item.quality }}</span>
 						</div>
 						<p class="description">{{ item.description }}</p>
 						<div class="actions">
-							<RouterLink to="/player/1">
+							<RouterLink :to="`/player/${props.item.id}`">
 								<button class="play">▶</button>
 							</RouterLink>
 							<button>✔</button>
 							<button>👍</button>
-							<button>⬇️</button>
+							<button @click="bookmarkVideo">⬇️</button>
 						</div>
 					</div>
 				</div>
@@ -31,18 +31,41 @@
 
 <script setup lang="ts">
 	import { ref } from "vue";
-	import type CardInterface from "../interfaces/VideoCardInterface";
+	import type VideoCardInterface from "../interfaces/VideoCardInterface";
 
 	interface CardComponentProperties {
-		item: CardInterface
+		item: VideoCardInterface
 	}
 
-	defineProps<CardComponentProperties>();
+	const props = defineProps<CardComponentProperties>();
 	
 	const hover = ref(false);
 	const cardRef = ref<HTMLElement | null>(null);
 	const fixedStyle = ref({});
 	
+	const formatDate = (dateString: string) => {
+		if (!dateString) { return "" };
+		const date = new Date(dateString);
+		return new Intl.DateTimeFormat("en-GB", {
+			day: "2-digit",
+			month: "long",
+			year: "numeric",
+		}).format(date);
+	};
+
+	const bookmarkVideo = async () => {
+		try {
+			const response = await fetch(`http://localhost:3001/bookmarks/${1}/${props.item.id}}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+			});
+
+			if (!response.ok) { throw new Error("Failed to bookmark the video") };
+		} catch (error) {
+			console.error("Error bookmarking video:", error);
+		}
+	}
+
 	const onHover = () => {
 		hover.value = true;
 		if (cardRef.value) {

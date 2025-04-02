@@ -2,17 +2,25 @@
     <section>
         <video controls></video>
     </section>
+
     <section class="ratings">
-        <h3>Ratings</h3>
-        <ul>
-            <li v-for="item in ratings" :key="item">{{ item.rating }}/5: {{ item.description }}</li>
+        <h2>Ratings</h2>
+        <ul v-if="ratings.length > 0">
+            <li v-for="item in ratings" :key="item.id">
+                {{ item.rating }}/5: {{ item.description }}
+            </li>
         </ul>
+        <p v-else>No ratings available at the moment.</p>
     </section>
+
     <section class="actors">
-        <h3>Actors</h3>
-        <ul>
-            <li v-for="item in actors" :key="item">{{ item.first_name }} {{ item.last_name }}</li>
+        <h2>Actors</h2>
+        <ul v-if="actors.length > 0">
+            <li v-for="item in actors" :key="item.id">
+                {{ item.first_name }} {{ item.last_name }}
+            </li>
         </ul>
+        <p v-else>No actors available at the moment.</p>
     </section>
 </template>
 
@@ -21,8 +29,8 @@
     import { useRoute } from "vue-router";
 
     const route = useRoute();
-    const ratings = ref<string>();
-    const actors = ref<string>();
+    const ratings = ref<Array<{ rating: string, description: string, id: number }>>([]);
+    const actors = ref<Array<{ first_name: string, last_name: string, id: number }>>([]);
 
     const fetchRatings = async () => {
         try {

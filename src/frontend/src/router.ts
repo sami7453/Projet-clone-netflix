@@ -1,47 +1,47 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import HomePage from "./pages/HomePage.vue";
-import LoginPage from "./pages/LoginPage.vue";
-import RegisterPage from "./pages/RegisterPage.vue";
-import PlayerPage from "./pages/PlayerPage.vue";
-import UserPage from "./pages/UserPage.vue";
-import MoviesPage from "./pages/MoviesPage.vue";
-import SeriesPage from "./pages/SeriesPage.vue";
-import NotFoundPage from "./pages/NotFoundPage.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
             path: "",
-            component: HomePage
+            component: () => import("./pages/HomePage.vue")
         },
         {
             path: "/login",
-            component: LoginPage
+            component: () => import("./pages/LoginPage.vue")
         },
         {
             path: "/register",
-            component: RegisterPage
+            component: () => import("./pages/RegisterPage.vue")
         },
         {
             path: "/movies",
-            component: MoviesPage
+            component: () => import("./pages/MoviesPage.vue")
         },
         {
             path: "/series",
-            component: SeriesPage
+            component: () => import("./pages/SeriesPage.vue")
         },
         {
-            path: "/user",
-            component: UserPage,
+            path: "/profile",
+            component: () => import("./pages/ProfilePage.vue"),
         },
         {
-            path: "/player/:id",
-            component: PlayerPage
+            path: "/player/movies/:id",
+            component: () => import("./pages/PlayerPage.vue")
+        },
+        {
+            path: "/player/series/:id",
+            component: () => import("./pages/PlayerPage.vue")
+        },
+        {
+            path: "/admin-dashboard",
+            component: () => import("./pages/AdminPage.vue")
         },
         {
             path: "/:pathMatch(.*)*",
-            component: NotFoundPage
+            component: () => import("./pages/NotFoundPage.vue")
         }
     ]
 });

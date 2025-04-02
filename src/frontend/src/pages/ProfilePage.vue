@@ -41,7 +41,7 @@
     import CarouselComponent from "../components/CarouselComponent.vue";
     import type FormInterface from "../interfaces/FormInterface";
     import type ButtonInterface from "../interfaces/ButtonInterface";
-    import type CardInterface from "../interfaces/VideoCardInterface";
+    import type VideoCardInterface from "../interfaces/VideoCardInterface";
 
     const user = ref({
         id: 1,
@@ -54,8 +54,8 @@
     const editPseudo = ref(user.value.username);
     const editEmail = ref(user.value.email);
     
-    const history = ref<CardInterface[]>([]);
-    const bookmarks = ref<CardInterface[]>([]);
+    const history = ref<VideoCardInterface[]>([]);
+    const bookmarks = ref<VideoCardInterface[]>([]);
 
     const fetchBookmarks = async () => {
         try {

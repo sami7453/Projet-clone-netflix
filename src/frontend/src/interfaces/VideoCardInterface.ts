@@ -1,4 +1,4 @@
-export default interface CardInterface {
+export default interface VideoCardInterface {
     id: string
     title: string
     description: string

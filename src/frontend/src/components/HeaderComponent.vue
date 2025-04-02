@@ -33,7 +33,7 @@
 
     const handleProfile = () => {
         // TODO: Vérifier si l'utilisateur est connecté
-        window.location.href = `/#/user`;
+        window.location.href = `/#/profile`;
     };
 
     const handleLogout = () => {

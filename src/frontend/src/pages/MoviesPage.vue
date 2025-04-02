@@ -12,9 +12,9 @@
     import { ref, onMounted } from "vue";
     import VideoCardComponent from "../components/VideoCardComponent.vue";
     import CarouselComponent from "../components/CarouselComponent.vue";
-    import type CardInterface from "../interfaces/VideoCardInterface";
+    import type VideoCardInterface from "../interfaces/VideoCardInterface";
 
-    const movies = ref<CardInterface[]>([]);
+    const movies = ref<VideoCardInterface[]>([]);
 
     const fetchMovies = async () => {
         try {

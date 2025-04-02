@@ -1,5 +1,5 @@
 <template>
-    <div class="carousel-wrapper">
+    <section class="carousel-wrapper">
         <button v-if="showLeft" class="nav-button left" @click="scroll('left')">
             &#10094;
         </button>
@@ -9,7 +9,7 @@
         <button v-if="showRight" class="nav-button right" @click="scroll('right')">
             &#10095;
         </button>
-    </div>
+    </section>
 </template>
   
 <script setup lang="ts">
@@ -22,6 +22,7 @@
     const updateButtons = () => {
         const el = scrollContainer.value;
         if (!el) { return };
+
         showLeft.value = el.scrollLeft > 0;
         showRight.value = el.scrollLeft + el.clientWidth < el.scrollWidth;
     }
@@ -29,7 +30,6 @@
     const scroll = (direction: "left" | "right") => {
         const scrollAmount = 400;
         const el = scrollContainer.value;
-
         if (!el) { return };
 
         el.scrollBy({

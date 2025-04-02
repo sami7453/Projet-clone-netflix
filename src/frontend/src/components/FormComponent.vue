@@ -1,5 +1,5 @@
 <template>
-    <form v-on:submit="onSubmit">
+    <form>
         <section>
             <h3>{{ data.title }}</h3>
         </section>
@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-    import type FormInterface from "../interfaces/FormInterface"
-    import FieldComponent from "./FieldComponent.vue"
-    import ButtonComponent from "./ButtonComponent.vue"
+    import type FormInterface from "../interfaces/FormInterface";
+    import FieldComponent from "./FieldComponent.vue";
+    import ButtonComponent from "./ButtonComponent.vue";
 
     interface FormComponentProperties {
         data: FormInterface
