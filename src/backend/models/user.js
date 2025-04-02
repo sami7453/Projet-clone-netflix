@@ -2,12 +2,12 @@ const pool = require("../db/pool");
 
 class User {
     // ----------------- CRUD -----------------
-    
+
     static async getAllUsers() {
         const result = await pool.query("SELECT * FROM users");
         return result.rows;
     }
-    
+
     static async getUserById(id) {
         const result = await pool.query(
             "SELECT * FROM users WHERE id = $1",
@@ -24,10 +24,10 @@ class User {
         return result.rows[0];
     }
 
-    static async createUser({ firstName, lastName, email, password }) {
+    static async createUser({ firstName, lastName, email, password, role = "user" }) {
         const result = await pool.query(
-            "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
-            [firstName, lastName, email, password]
+            "INSERT INTO users (first_name, last_name, email, password, role) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [firstName, lastName, email, password, role]
         );
         return result.rows[0];
     }
