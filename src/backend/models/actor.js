@@ -33,10 +33,11 @@ class Actor {
     }
 
     static async deleteActor(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM actors WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 
     // ----------------- EXTRA -----------------

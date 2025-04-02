@@ -33,10 +33,11 @@ class Rating {
     }
 
     static async deleteRating(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM ratings WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 
     // ----------------- EXTRA -----------------

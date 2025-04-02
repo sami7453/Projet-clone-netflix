@@ -33,10 +33,11 @@ class Season {
     }
 
     static async deleteSeason(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM seasons WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 }
 

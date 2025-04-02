@@ -33,10 +33,11 @@ class SupportTicket {
     }
 
     static async deleteSupportTicket(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM support_tickets WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 
     // ----------------- EXTRA -----------------

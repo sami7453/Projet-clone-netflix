@@ -33,10 +33,11 @@ class Episode {
     }
 
     static async deleteEpisode(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM episodes WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 }
 

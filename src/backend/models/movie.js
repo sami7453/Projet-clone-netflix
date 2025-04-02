@@ -33,10 +33,11 @@ class Movie {
     }
 
     static async deleteMovie(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM movies WHERE id = $1 RETURNING *",
             [id]
         );
+        return result.rowCount;
     }
 
     // ----------------- EXTRA -----------------

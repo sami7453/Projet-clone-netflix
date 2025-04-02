@@ -33,10 +33,11 @@ class Series {
     }
 
     static async deleteSerie(id) {
-        await pool.query(
+        const result = await pool.query(
             "DELETE FROM series WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 }
 

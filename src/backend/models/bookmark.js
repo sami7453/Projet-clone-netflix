@@ -33,10 +33,11 @@ class Bookmark {
     }
 
     static async deleteBookmark(id) {
-        pool.query(
+        const result = await pool.query(
             "DELETE FROM bookmarks WHERE id = $1",
             [id]
         );
+        return result.rowCount;
     }
 
     // ----------------- EXTRA -----------------
