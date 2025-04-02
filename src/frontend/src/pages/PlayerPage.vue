@@ -37,7 +37,7 @@
             const videoId = route.params.id;
             if (!videoId) { return };
 
-            const response = await fetch(`http://localhost:3001/ratings/movies/${videoId}`);
+            const response = await fetch(`http://localhost:3000/ratings/movies/${videoId}`);
             ratings.value = await response.json();
         } catch (error) {
             console.error("Error fetching ratings:", error);
@@ -49,7 +49,7 @@
             const videoId = route.params.id;
             if (!videoId) { return };
 
-            const response = await fetch(`http://localhost:3001/actors/movies/${videoId}`);
+            const response = await fetch(`http://localhost:3000/actors/movies/${videoId}`);
             actors.value = await response.json();
         } catch (error) {
             console.error("Error fetching actors:", error);

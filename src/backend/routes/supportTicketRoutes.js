@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
     try {
         const supportTickets = await SupportTicket.getAllSupportTickets();
         res.status(200).json(supportTickets);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
         supportTicket
             ? res.status(200).json(supportTicket)
             : res.status(404).json({ message: "Support ticket not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -32,8 +32,8 @@ router.post("/", async (req, res) => {
         }
         const supportTicket = await SupportTicket.createSupportTicket({ firstName, lastName,  movieId, seriesId });
         res.status(201).json(supportTicket);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -47,8 +47,8 @@ router.put("/:id", async (req, res) => {
         supportTicket
             ? res.status(200).json(supportTicket)
             : res.status(404).json({ message: "Support ticket not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -58,8 +58,8 @@ router.delete("/:id", async (req, res) => {
         supportTicket
             ? res.status(200).json(supportTicket)
             : res.status(404).json({ message: "Support ticket not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -69,8 +69,8 @@ router.get("/users/:id", async (req, res) => {
     try {
         const supportTickets = await SupportTicket.getSupportTicketsByUserId(req.params.id);
         res.status(200).json(supportTickets);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 

@@ -38,8 +38,8 @@
     const fetchMovies = async () => {
         try {
             const [trendingResponse, recommendedResponse] = await Promise.all([
-                fetch("http://localhost:3001/movies/trending"),
-                fetch("http://localhost:3001/movies/recommended")
+                fetch("http://localhost:3000/movies/trending"),
+                fetch("http://localhost:3000/movies/recommended")
             ]);
 
             const trendingMovies = await trendingResponse.json();

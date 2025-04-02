@@ -59,11 +59,11 @@
 
     const fetchBookmarks = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/bookmarks/users/${user.value.id}`);
+            const response = await fetch(`http://localhost:3000/bookmarks/users/${user.value.id}`);
             const bookmarksData = await response.json();
 
             const moviePromises = bookmarksData.map(async (bookmark: any) => {
-                const movieResponse = await fetch(`http://localhost:3001/movies/${bookmark.movie_id}`);
+                const movieResponse = await fetch(`http://localhost:3000/movies/${bookmark.movie_id}`);
                 const movieData = await movieResponse.json();
                 return movieData;
             });
@@ -76,11 +76,11 @@
 
     const fetchHistory = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/histories/users/${user.value.id}`);
+            const response = await fetch(`http://localhost:3000/histories/users/${user.value.id}`);
             const historyData = await response.json();
 
             const moviePromises = historyData.map(async (historyItem: any) => {
-                const movieResponse = await fetch(`http://localhost:3001/movies/${historyItem.movie_id}`);
+                const movieResponse = await fetch(`http://localhost:3000/movies/${historyItem.movie_id}`);
                 const movieData = await movieResponse.json();
                 return movieData;
             });

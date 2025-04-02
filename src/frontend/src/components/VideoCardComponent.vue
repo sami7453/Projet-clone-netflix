@@ -55,7 +55,7 @@
 
 	const bookmarkVideo = async () => {
 		try {
-			const response = await fetch(`http://localhost:3001/bookmarks/${1}/${props.item.id}}`, {
+			const response = await fetch(`http://localhost:3000/bookmarks/${1}/${props.item.id}}`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 			});

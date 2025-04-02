@@ -21,7 +21,7 @@
 
     const fetchSupportTickets = async () => {
         try {
-            const response = await fetch("http://localhost:3001/support-tickets");
+            const response = await fetch("http://localhost:3000/support-tickets");
             supportTickets.value = await response.json();
         } catch (error) {
             console.error("Error fetching support tickets:", error);

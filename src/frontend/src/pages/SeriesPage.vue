@@ -18,7 +18,7 @@
 
     const fetchSeries = async () => {
         try {
-            const response = await fetch("http://localhost:3001/series");
+            const response = await fetch("http://localhost:3000/series");
             series.value = await response.json();
         } catch (error) {
             console.error("Error fetching series:", error);

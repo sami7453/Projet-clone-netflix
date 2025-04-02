@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
     try {
         const series = await Series.getAllSeries();
         res.status(200).json(series);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
         serie
             ? res.status(200).json(serie)
             : res.status(404).json({ message: "Serie not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -32,8 +32,8 @@ router.post("/", async (req, res) => {
         }
         const serie = await Series.createSerie({ name, description, releaseDate, endDate, seasons, episodes, categories });
         res.status(201).json(serie);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -47,8 +47,8 @@ router.put("/:id", async (req, res) => {
         serie
             ? res.status(200).json(serie)
             : res.status(404).json({ message: "Serie not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -58,8 +58,8 @@ router.delete("/:id", async (req, res) => {
         serie
             ? res.status(200).json(serie)
             : res.status(404).json({ message: "Serie not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 

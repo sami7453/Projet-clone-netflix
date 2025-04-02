@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
     try {
         const bookmarks = await Bookmark.getAllBookmarks();
         res.status(200).json(bookmarks);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
         bookmark
             ? res.status(200).json(bookmark)
             : res.status(404).json({ message: "bookmark not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -29,8 +29,8 @@ router.post("/:user_id/:movie_id", async (req, res) => {
         const { user_id, movie_id } = req.params;
         const bookmark = await Bookmark.createBookmark(user_id, movie_id);
         res.status(201).json(bookmark);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -44,8 +44,8 @@ router.put("/:id", async (req, res) => {
         bookmark
             ? res.status(200).json(bookmark)
             : res.status(404).json({ message: "bookmark not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -55,8 +55,8 @@ router.delete("/:id", async (req, res) => {
         bookmark
             ? res.status(200).json(bookmark)
             : res.status(404).json({ message: "bookmark not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -66,8 +66,8 @@ router.get("/users/:id", async (req, res) => {
     try {
         const bookmarks = await Bookmark.getBookmarksByUserId(req.params.id);
         res.status(200).json(bookmarks);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 })
 

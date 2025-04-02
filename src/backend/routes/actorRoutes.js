@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
     try {
         const actors = await Actor.getAllActors();
         res.status(200).json(actors);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
         actor
             ? res.status(200).json(actor)
             : res.status(404).json({ message: "Actor not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -32,8 +32,8 @@ router.post("/", async (req, res) => {
         }
         const actor = await Actor.createActor({ firstName, lastName, movieId, seriesId });
         res.status(201).json(actor);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -47,8 +47,8 @@ router.put("/:id", async (req, res) => {
         actor
             ? res.status(200).json(actor)
             : res.status(404).json({ message: "Actor not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -58,8 +58,8 @@ router.delete("/:id", async (req, res) => {
         actor
             ? res.status(200).json(actor)
             : res.status(404).json({ message: "Actor not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -69,8 +69,8 @@ router.get("/movies/:id", async (req, res) => {
     try {
         const actors = await Actor.getActorsByMovieId(req.params.id);
         res.status(200).json(actors);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -78,8 +78,8 @@ router.get("/series/:id", async (req, res) => {
     try {
         const actors = await Actor.getActorsBySeriesId(req.params.id);
         res.status(200).json(actors);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
 
