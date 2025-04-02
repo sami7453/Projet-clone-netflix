@@ -4,19 +4,43 @@
         <p class="ticket-description">{{ data.description }}</p>
         <div class="ticket-dates">
             <p><strong>Opened:</strong> {{ data.open_date }}</p>
-            <p><strong>Closed:</strong> {{ data.close_date ? data.close_date : 'Ongoing issue' }}</p>
         </div>
+        <ButtonComponent :data="closeTicketButtonData" @click="deleteTicket" />
     </fieldset>
 </template>
 
 <script setup lang="ts">
+    import ButtonComponent from "./ButtonComponent.vue";
+    import type ButtonInterface from "../interfaces/ButtonInterface";
     import type SupportTicketInterface from "../interfaces/SupportTicketInterface";
 
     interface SupportTicketComponentProperties {
         data: SupportTicketInterface;
     }
 
-    defineProps<SupportTicketComponentProperties>();
+    const props = defineProps<SupportTicketComponentProperties>();
+
+    const closeTicketButtonData: ButtonInterface = {
+        id: "close-ticket-button",
+        type: "button",
+        class: "",
+        textContent: "Close"
+    }
+
+    const deleteTicket = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/support-tickets/${props.data.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+            if (!response.ok) { throw new Error("Failed to delete ticket"); }
+        } catch (error) {
+            console.error("Error deleting ticket:", error);
+        }
+    }
 </script>
 
 <style scoped lang="css">

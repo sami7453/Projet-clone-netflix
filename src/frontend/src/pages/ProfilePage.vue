@@ -1,9 +1,7 @@
 <template>
     <section class="user-info">
         <h2>Hello, {{ user.username }}</h2>
-        <p>
-            <strong>Email:</strong> {{ user.email }}
-        </p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
         <ButtonComponent :data="updateButtonData" @click="startEditing" />
         <FormComponent v-if="editing" :data="formData" @field-change="handleFieldChange" @submit="saveEdits" />
     </section>
@@ -13,7 +11,7 @@
         <CarouselComponent v-if="bookmarks.length > 0">
             <VideoComponent v-for="bookmark in bookmarks" :key="bookmark.id" :data="bookmark" />
         </CarouselComponent>
-        <p v-else>Start bookmarking movies or series now.</p>
+        <p v-else>Start bookmarking movies or series to see them appear in your bookmarks.</p>
     </section>
 
     <section class="history">
@@ -21,7 +19,7 @@
         <CarouselComponent v-if="history.length > 0">
             <VideoComponent v-for="historyRecord in history" :key="historyRecord.id" :data="historyRecord" />
         </CarouselComponent>
-        <p v-else>Start watching movies or series now.</p>
+        <p v-else>Start watching movies or series to see them appear in your history.</p>
     </section>
 
     <section class="preferences">
