@@ -4,17 +4,15 @@ const History = require("../models/history");
 
 // ----------------- CRUD -----------------
 
-// GET all history
 router.get("/", async (req, res) => {
     try {
-        const history = await History.getAllHistory();
+        const history = await History.getAllHistories();
         res.status(200).json(history);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// GET history by id
 router.get("/:id", async (req, res) => {
     try {
         const history = await History.getHistoryById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST history
 router.post("/:user_id/:movie_id", async (req, res) => {
     try {
         const { user_id, movie_id } = req.params;
@@ -37,12 +34,22 @@ router.post("/:user_id/:movie_id", async (req, res) => {
     }
 });
 
-// DELETE history by id
 router.delete("/:id", async (req, res) => {
     try {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+// ----------------- EXTRA -----------------
+
+router.get("/users/:id", async (req, res) => {
+    try {
+        const history = await History.getHistoryByUserId(req.params.id);
+        res.status(200).json(history);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+})
 
 module.exports = router;

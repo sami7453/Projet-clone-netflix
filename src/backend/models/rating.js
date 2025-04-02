@@ -38,6 +38,32 @@ class Rating {
             [id]
         );
     }
+
+    // ----------------- EXTRA -----------------
+    
+    static async getRatingsByUserId(id) {
+        const result = await pool.query(
+            "SELECT * FROM ratings WHERE user_id = $1",
+            [id]
+        );
+        return result.rows;
+    }
+
+    static async getRatingsByMovieId(id) {
+        const result = await pool.query(
+            "SELECT * FROM ratings WHERE movie_id = $1",
+            [id]
+        );
+        return result.rows;
+    }
+
+    static async getRatingsBySeriesId(id) {
+        const result = await pool.query(
+            "SELECT * FROM ratings WHERE series_id = $1",
+            [id]
+        );
+        return result.rows;
+    }
 }
 
 module.exports = Rating;

@@ -4,65 +4,60 @@ const SupportTicket = require("../models/supportTicket");
 
 // ----------------- CRUD -----------------
 
-// GET all support tickets
 router.get("/", async (req, res) => {
     try {
-        const actors = await SupportTicket.getAllSupportTickets();
-        res.status(200).json(actors);
+        const supportTickets = await SupportTicket.getAllSupportTickets();
+        res.status(200).json(supportTickets);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// GET support ticket by id
-router.get("//:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const actor = await SupportTicket.getSupportTicketById(req.params.id);
-        actor
-            ? res.status(200).json(actor)
-            : res.status(404).json({ message: "Actor not found" });
+        const supportTicket = await SupportTicket.getSupportTicketById(req.params.id);
+        supportTicket
+            ? res.status(200).json(supportTicket)
+            : res.status(404).json({ message: "Support ticket not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// POST support ticket
 router.post("/", async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
         if (!firstName || !lastName || !movieId || !seriesId) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        const actor = await SupportTicket.createSupportTicket({ firstName, lastName,  movieId, seriesId });
-        res.status(201).json(actor);
+        const supportTicket = await SupportTicket.createSupportTicket({ firstName, lastName,  movieId, seriesId });
+        res.status(201).json(supportTicket);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// PUT support ticket
 router.put("/:id", async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
         if (!firstName || !lastName || !movieId || !seriesId) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        const actor = await SupportTicket.updateSupportTicket(req.params.id, { firstName, lastName, movieId, seriesId });
-        actor
-            ? res.status(200).json(actor)
-            : res.status(404).json({ message: "Actor not found" });
+        const supportTicket = await SupportTicket.updateSupportTicket(req.params.id, { firstName, lastName, movieId, seriesId });
+        supportTicket
+            ? res.status(200).json(supportTicket)
+            : res.status(404).json({ message: "Support ticket not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// DELETE support ticket
 router.delete("/:id", async (req, res) => {
     try {
-        const actor = await SupportTicket.deleteSupportTicket(req.params.id);
-        actor
-            ? res.status(200).json(actor)
-            : res.status(404).json({ message: "Actor not found" });
+        const supportTicket = await SupportTicket.deleteSupportTicket(req.params.id);
+        supportTicket
+            ? res.status(200).json(supportTicket)
+            : res.status(404).json({ message: "Support ticket not found" });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -70,7 +65,13 @@ router.delete("/:id", async (req, res) => {
 
 // ----------------- EXTRA -----------------
 
-// GET support ticket by user id
-router.get("/users/:user_id", async (req, res) => {});
+router.get("/users/:id", async (req, res) => {
+    try {
+        const supportTickets = await SupportTicket.getSupportTicketsByUserId(req.params.id);
+        res.status(200).json(supportTickets);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 module.exports = router;

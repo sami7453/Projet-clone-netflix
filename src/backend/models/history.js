@@ -39,6 +39,16 @@ class History {
         );
         return result.rowCount;
     }
+
+    // ----------------- EXTRA -----------------
+
+    static async getHistoryByUserId(id) {
+        const result = await pool.query(
+            "SELECT * FROM history WHERE user_id = $1",
+            [id]
+        );
+        return result.rows;
+    }
 }
 
 module.exports = History;

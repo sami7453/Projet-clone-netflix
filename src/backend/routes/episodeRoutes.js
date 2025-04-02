@@ -4,7 +4,6 @@ const Episode = require("../models/episode");
 
 // ----------------- CRUD -----------------
 
-// GET all episodes
 router.get("/", async (req, res) => {
     try {
         const episodes = await Episode.getAllEpisodes();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET episode by id
 router.get("/:id", async (req, res) => {
     try {
         const episode = await Episode.getEpisodeById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST episode
 router.post("/", async (req, res) => {
     try {
         const { season_id, title, description, duration, video_url } = req.body;
@@ -40,7 +37,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT episode
 router.put("/:id", async (req, res) => {
     try {
         const { season_id, title, description, duration, video_url } = req.body;
@@ -56,7 +52,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE episode
 router.delete("/:id", async (req, res) => {
     try {
         const episode = await Episode.deleteEpisode(req.params.id);

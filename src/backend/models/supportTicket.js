@@ -38,6 +38,16 @@ class SupportTicket {
             [id]
         );
     }
+
+    // ----------------- EXTRA -----------------
+
+    static async getSupportTicketsByUserId(id) {
+        const result = await pool.query(
+            "SELECT * FROM support_tickets WHERE user_id = $1",
+            [id]
+        );
+        return result.rows;
+    }
 }
 
 module.exports = SupportTicket;

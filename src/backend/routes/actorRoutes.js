@@ -4,7 +4,6 @@ const Actor = require("../models/actor");
 
 // ----------------- CRUD -----------------
 
-// GET all actors
 router.get("/", async (req, res) => {
     try {
         const actors = await Actor.getAllActors();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET actor by id
 router.get("/:id", async (req, res) => {
     try {
         const actor = await Actor.getActorById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST actor
 router.post("/", async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -40,7 +37,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT actor
 router.put("/:id", async (req, res) => {
     try {
         const { firstName, lastName, movieId, seriesId } = req.body;
@@ -56,7 +52,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE actor
 router.delete("/:id", async (req, res) => {
     try {
         const actor = await Actor.deleteActor(req.params.id);
@@ -70,7 +65,6 @@ router.delete("/:id", async (req, res) => {
 
 // ----------------- EXTRA -----------------
 
-// GET actors by movie id
 router.get("/movies/:movie_id", async (req, res) => {
     try {
         const actors = await Actor.getActorsByMovieId(req.params.movie_id);
@@ -80,7 +74,6 @@ router.get("/movies/:movie_id", async (req, res) => {
     }
 });
 
-// GET actors by series id
 router.get("/series/:series_id", async (req, res) => {
     try {
         const actors = await Actor.getActorsBySeriesId(req.params.series_id);

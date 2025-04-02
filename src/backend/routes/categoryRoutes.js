@@ -4,7 +4,6 @@ const Category = require("../models/category");
 
 // ----------------- CRUD -----------------
 
-// GET all categories
 router.get("/", async (req, res) => {
     try {
         const categories = await Category.getAllCategories();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET category by id
 router.get("/:id", async (req, res) => {
     try {
         const category = await Category.getCategoryById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST category
 router.post("/", async (req, res) => {
     try {
         const { name } = req.body;
@@ -40,7 +37,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT category
 router.put("/:id", async (req, res) => {
     try {
         const { name } = req.body;
@@ -56,7 +52,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE category
 router.delete("/:id", async (req, res) => {
     try {
         const category = await Category.deleteCategory(req.params.id);

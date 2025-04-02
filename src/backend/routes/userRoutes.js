@@ -4,7 +4,6 @@ const User = require("../models/user");
 
 // ----------------- CRUD -----------------
 
-// GET all users
 router.get("/", async (req, res) => {
     try {
         const users = await User.getAllUsers();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET user by id
 router.get("/:id", async (req, res) => {
     try {
         const user = await User.getUserById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST user
 router.post("/", async (req, res) => {
     try {
         const { first_name, last_name, email, password } = req.body;
@@ -40,10 +37,8 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT user
 router.put("/:id", async (req, res) => {});
 
-// DELETE user
 router.delete("/:id", async (req, res) => {
     try {
         await User.deleteUser(req.params.id);
@@ -55,28 +50,22 @@ router.delete("/:id", async (req, res) => {
 
 // ----------------- EXTRA -----------------
 
-// POST register
+// TODO
+
 router.post("/register", async (req, res) => {});
 
-// POST login
 router.post("/login", async (req, res) => {});
 
-// POST logout
 router.post("/logout", async (req, res) => {});
 
-// PATCH update user first name
 router.patch("/:id/first_name", async (req, res) => {});
 
-// PATCH update user last name
 router.patch("/:id/last_name", async (req, res) => {});
 
-// PATCH update user email
 router.patch("/:id/email", async (req, res) => {});
 
-// PATCH update user password
 router.patch("/:id/password", async (req, res) => {});
 
-// PATCH update user avatar
 router.patch("/:id/avatar", async (req, res) => {});
 
 module.exports = router;

@@ -4,7 +4,6 @@ const Series = require("../models/series");
 
 // ----------------- CRUD -----------------
 
-// GET all series
 router.get("/", async (req, res) => {
     try {
         const series = await Series.getAllSeries();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET series by id
 router.get("/:id", async (req, res) => {
     try {
         const serie = await Series.getSerieById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST serie
 router.post("/", async (req, res) => {
     try {
         const { name, description, releaseDate, endDate, seasons, episodes, categories } = req.body;
@@ -40,7 +37,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT serie
 router.put("/:id", async (req, res) => {
     try {
         const { name, description, releaseDate, endDate, seasons, episodes, categories } = req.body;
@@ -56,7 +52,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE serie
 router.delete("/:id", async (req, res) => {
     try {
         const serie = await Series.deleteSerie(req.params.id);

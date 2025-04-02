@@ -2,9 +2,28 @@ const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
 
+// ----------------- EXTRA -----------------
+
+router.get("/trending", async (req, res) => {
+    try {
+        const movies = await Movie.getTrendingMovies();
+        res.status(200).json(movies);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get("/recommended", async (req, res) => {
+    try {
+        const movies = await Movie.getRecommendMovies();
+        res.status(200).json(movies);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // ----------------- CRUD -----------------
 
-// GET all movies
 router.get("/", async (req, res) => {
     try {
         const movies = await Movie.getAllMovies();
@@ -14,7 +33,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET movie by id
 router.get("/:id", async (req, res) => {
     try {
         const movie = await Movie.getMovieById(req.params.id);
@@ -26,7 +44,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST movie
 router.post("/", async (req, res) => {
     try {
         const { title, description, release_date, category, poster, category_id } = req.body;
@@ -61,47 +78,6 @@ router.delete("/:id", async (req, res) => {
         movie
             ? res.status(200).json(movie)
             : res.status(404).json({ message: "Movie not found" });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-router.get("/category/:category_id", async (req, res) => {
-    try {
-        const movies = await Movie.getMovieByCategory(req.params.category_id);
-        res.status(200).json(movies);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// ----------------- EXTRA -----------------
-
-router.get("/popular-movies", async (req, res) => {
-    try {
-        const movies = await Movie.getMovieByPopularity();
-        console.log(movies);
-        res.status(200).json(movies);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-router.get("/new-movies", async (req, res) => {
-    try {
-        const movies = await Movie.getThisMountMovie();
-        res.status(200).json(movies);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-router.get("/recommended-movies/:user_id", async (req, res) => {
-    try {
-        const movies = await Movie.getRecommendedMoviesForUser(
-            req.params.user_id
-        );
-        res.status(200).json(movies);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

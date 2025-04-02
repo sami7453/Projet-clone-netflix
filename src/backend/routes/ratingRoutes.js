@@ -4,7 +4,6 @@ const Rating = require("../models/rating");
 
 // ----------------- CRUD -----------------
 
-// GET all ratings
 router.get("/", async (req, res) => {
     try {
         const ratings = await Rating.getAllRatings();
@@ -14,7 +13,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET rating by id
 router.get("/:id", async (req, res) => {
     try {
         const rating = await Rating.getRatingById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST rating
 router.post("/", async (req, res) => {
     try {
         const { user_id, movie_id, rating } = req.body;
@@ -40,7 +37,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT rating
 router.put("/:id", async (req, res) => {
     try {
         const { user_id, movie_id, rating } = req.body;
@@ -56,7 +52,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE rating
 router.delete("/:id", async (req, res) => {
     try {
         const rating = await Rating.deleteRating(req.params.id);
@@ -70,14 +65,31 @@ router.delete("/:id", async (req, res) => {
 
 // ----------------- EXTRA -----------------
 
-router.get("/:user_id", async (req, res) => {});
+router.get("/users/:id", async (req, res) => {
+    try {
+        const ratings = await Rating.getRatingsByUserId(req.params.id);
+        res.status(200).json(ratings);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
-router.get("/:movie_id", async (req, res) => {});
+router.get("/movies/:id", async (req, res) => {
+    try {
+        const ratings = await Rating.getRatingsByMovieId(req.params.id);
+        res.status(200).json(ratings);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
-router.get("/:user_id/:movie_id", async (req, res) => {});
-
-router.put("/:user_id/:movie_id", async (req, res) => {});
-
-router.delete("/:user_id/:movie_id", async (req, res) => {});
+router.get("/series/:id", async (req, res) => {
+    try {
+        const ratings = await Rating.getRatingsBySeriesId(req.params.id);
+        res.status(200).json(ratings);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 module.exports = router;
